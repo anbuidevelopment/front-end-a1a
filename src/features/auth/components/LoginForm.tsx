@@ -1,22 +1,8 @@
-import {
-  Button,
-  Card,
-  CardContent,
-  CircularProgress,
-  Grid,
-  IconButton,
-  Stack,
-  Typography,
-} from '@mui/material';
-import {
-  KeyOutlined,
-  PersonOutline,
-  VisibilityOffOutlined,
-  VisibilityOutlined,
-} from '@mui/icons-material';
-import { InputField } from '@/components/Form';
-import { useState } from 'react';
-import { useLogin, useLogout } from '@/lib/auth';
+import {Button, Card, CardContent, CircularProgress, Grid, IconButton, Stack, Typography,} from '@mui/material';
+import {KeyOutlined, PersonOutline, VisibilityOffOutlined, VisibilityOutlined,} from '@mui/icons-material';
+import {InputField} from '@/components/Form';
+import {useState} from 'react';
+import {useLogin} from '@/lib/auth';
 
 type LoginFormProps = {
   onSuccess: () => void;
@@ -26,13 +12,8 @@ export function LoginForm({ onSuccess }: LoginFormProps) {
   const [isShowPass, setIsShowPass] = useState(false);
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const logout = useLogout();
-
-  const onLogout = () => {
-    logout.mutate({});
-  };
-
   const login = useLogin();
+
   const onShowPassword = () => {
     setIsShowPass(!isShowPass);
   };
@@ -46,12 +27,11 @@ export function LoginForm({ onSuccess }: LoginFormProps) {
   };
 
   if (login.isSuccess) {
-    onSuccess();
+    onSuccess()
   }
 
   return (
     <Grid item xs={12} md={6} justifyContent={'center'} alignItems={'center'}>
-      <Button onClick={onLogout}>Logout</Button>
       <Card>
         <CardContent sx={{ justifyContent: 'center', alignItems: 'center' }}>
           <Stack spacing={2}>

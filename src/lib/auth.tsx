@@ -2,18 +2,23 @@ import storage from '@/utils/storage';
 import {
   AccountResponse,
   AuthAccount,
-  executeLogin,
+  executeLogin, executeRegister,
   LoginRequestDTO,
   RegisterCredentialsDTO,
 } from '@/features/auth';
 import { configureAuth } from 'react-query-auth';
 
+
+function _b64DecodeUnicode(str: string) {
+  return decodeURIComponent(Array.prototype.map.call(atob(str), function(c) {
+    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
+  }).join(''))
+}
 function _mapAccountFromToken(): AuthAccount {
-  return JSON.parse(atob(storage.getToken().split('.')[1]));
+  return JSON.parse(_b64DecodeUnicode(storage.getToken().split('.')[1]))["account"];
 }
 
 async function handleUserResponse(data: AccountResponse) {
-  console.log('Testing: ', data);
   storage.setToken(data.access_token);
   return _mapAccountFromToken();
 }
@@ -36,7 +41,7 @@ async function logoutFn() {
 }
 
 async function registerFn(data: RegisterCredentialsDTO) {
-  // const response = await executeRegister(data);
+    await executeRegister(data);
   // const user = await handleUserResponse(response);
   return null;
 }

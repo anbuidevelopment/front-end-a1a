@@ -60,21 +60,21 @@ export function LoginForm({ onSuccess }: LoginFormProps) {
             </Typography>
 
             <InputField
-              fullwidth={true}
+              fullWidth={true}
               id="outline-username"
-              labelName="Username"
-              valueName={username}
-              setValue={setUsername}
+              label="Username"
+              value={username}
+              onChange={event => setUsername(event.target.value)}
               type="text"
               startAdornment={<PersonOutline sx={{ mr: 1 }} />}
             />
 
             <InputField
-              fullwidth={true}
+              fullWidth={true}
               id="outline-password"
-              labelName="Password"
-              valueName={password}
-              setValue={setPassword}
+              label="Password"
+              value={password}
+              onChange={event => setPassword(event.target.value)}
               type={isShowPass ? 'text' : 'password'}
               onEnterPress={onSubmitLogin}
               startAdornment={<KeyOutlined sx={{ mr: 1 }} />}

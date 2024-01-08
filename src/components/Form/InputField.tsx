@@ -1,61 +1,39 @@
-import { FormControl, InputLabel, OutlinedInput } from '@mui/material';
+import { FormControl, InputLabel, InternalStandardProps as StandardProps, OutlinedInput } from '@mui/material';
+import React from 'react';
+import { InputBaseProps } from '@mui/material/InputBase';
 
-interface InputFieldProps {
-  id?: string;
-  labelName?: string;
-  inputError?: boolean;
-  valueName?: string | number;
-  setValue: (value: any) => void;
-  endAdornment?: any;
-  startAdornment?: any;
-  type?: string;
-  enable?: any;
-  rowNum?: number;
-  multiline?: boolean;
+interface OutlinedInputCustomProps extends StandardProps<InputBaseProps> {
   onEnterPress?: () => void;
-  fullwidth?: boolean;
+  onChange: (v : any) => void;
+  label?: string;
 }
 
-export const InputField = ({
-  id,
-  labelName,
-  inputError,
-  valueName,
-  setValue,
-  endAdornment,
-  startAdornment,
-  type,
-  enable,
-  rowNum,
-  multiline,
-  onEnterPress,
-  fullwidth,
-}: InputFieldProps) => {
+export const InputField = ((props: OutlinedInputCustomProps) => {
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter' && onEnterPress) {
-      onEnterPress();
+    if (e.key === 'Enter' && {}) {
     }
   };
   return (
-    <FormControl fullWidth={fullwidth}>
-      <InputLabel htmlFor={id} error={inputError}>
-        {labelName}
+    <FormControl fullWidth={props.fullWidth}>
+      <InputLabel htmlFor={props.id} error={props.error}>
+        {props.label}
       </InputLabel>
       <OutlinedInput
         sx={{ borderRadius: '16px', background: 'initial' }}
-        rows={rowNum}
-        multiline={multiline}
-        id={id}
-        value={valueName}
-        label={labelName}
-        onChange={(e) => setValue(e.target.value)}
-        endAdornment={endAdornment}
-        startAdornment={startAdornment}
-        error={inputError}
-        type={type}
-        disabled={enable}
+        rows={props.rows}
+        multiline={props.multiline}
+        id={props.id}
+        name={props.name}
+        value={props.value}
+        label={props.label}
+        onChange={props.onChange}
+        endAdornment={props.endAdornment}
+        startAdornment={props.startAdornment}
+        error={props.error}
+        type={props.type}
+        disabled={props.disabled}
         onKeyDown={handleKeyPress}
       />
     </FormControl>
   );
-};
+});

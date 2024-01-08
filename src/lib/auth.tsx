@@ -8,13 +8,24 @@ import {
 } from '@/features/auth';
 import { configureAuth } from 'react-query-auth';
 
-function _mapAccountFromToken(): AuthAccount {
-  return JSON.parse(atob(storage.getToken().split('.')[1]));
+function _b64DecodeUnicode(str: string) {
+  return decodeURIComponent(Array.prototype.map.call(atob(str), function(c) {
+    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+  }).join(''));
 }
 
+function _mapAccountFromToken(): AuthAccount {
+  return JSON.parse(_b64DecodeUnicode(storage.getToken().split('.')[1]))['account'];
+}
+
+// function _mapAccountFromToken(): AuthAccount {
+//     return JSON.parse(atob(storage.getToken().split('.')[1])).account;
+// }
+
 async function handleUserResponse(data: AccountResponse) {
-  console.log('Testing: ', data);
+  // console.log('Testing: ', data);
   storage.setToken(data.access_token);
+  // console.log('Testing: ', JSON.parse(atob(storage.getToken().split('.')[1])));
   return _mapAccountFromToken();
 }
 

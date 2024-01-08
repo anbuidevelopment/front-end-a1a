@@ -12,4 +12,17 @@ const storage = {
   },
 };
 
+const storageFilter = {
+  getData: (name:string) => {
+    return JSON.parse(window.sessionStorage.getItem(name) as string);
+  },
+  setData: (name:string,data:any) => {
+    window.sessionStorage.setItem(name, JSON.stringify(data));
+  },
+  clearData: (name:string) => {
+    window.sessionStorage.removeItem(name);
+  },
+};
+
+export {storageFilter}
 export default storage;

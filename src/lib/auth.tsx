@@ -43,7 +43,7 @@ async function loginFn(data: LoginRequestDTO) {
 
 async function logoutFn() {
   storage.clearToken();
-  window.location.assign(window.location.origin as unknown as string);
+  window.location.replace(window.location.origin + "/sm" as unknown as string);
 }
 
 async function registerFn(data: RegisterCredentialsDTO) {

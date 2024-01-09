@@ -1,4 +1,5 @@
-import { createSlice, nanoid } from '@reduxjs/toolkit';
+import { nanoid } from '@reduxjs/toolkit';
+import { create } from "zustand";
 
 export type Notification = {
   id: string;
@@ -7,26 +8,20 @@ export type Notification = {
   duration: number;
 };
 
-interface NotificationsState {
+type NotificationStore = {
   notifications: Notification[];
-}
+  addNotification: (notification: Omit<Notification, 'id'>) => void;
+  dismissNotification: (id: string) => void;
+};
 
-const initialState: NotificationsState = { notifications: [] };
-
-const notificationsSlice = createSlice({
-  name: 'notifications',
-  initialState: initialState,
-  reducers: {
-    addNotification(state, action: { payload: Omit<Notification, 'id'> }) {
-      state.notifications.push({ id: nanoid(), ...action.payload });
-    },
-    dismissNotification(state, action: { payload: string }) {
-      state.notifications = state.notifications.filter(
-        (notification) => notification.id !== action.payload
-      );
-    },
-  },
-});
-
-export const { addNotification, dismissNotification } = notificationsSlice.actions;
-export default notificationsSlice.reducer;
+export const useNotificationStore = create<NotificationStore>((set) => ({
+  notifications: [],
+  addNotification: (notification) =>
+    set((state) => ({
+      notifications: [...state.notifications, { id: nanoid(), ...notification }],
+    })),
+  dismissNotification: (id) =>
+    set((state) => ({
+      notifications: state.notifications.filter((notification) => notification.id !== id),
+    })),
+}));

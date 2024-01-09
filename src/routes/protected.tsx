@@ -1,4 +1,3 @@
-// import { Navigate } from 'react-router-dom';
 
 import { lazyImport } from '@/utils/lazyImport';
 
@@ -9,7 +8,6 @@ const { NotFound } = lazyImport(() => import('@/features/misc'), 'NotFound');
 const { StyleInfo } = lazyImport(() => import('@/features/style_info'), 'StyleInfo');
 
 export const protectedRoutes = [
-  { path: '/', element: <Dashboard /> },
-  { path: '*', element: <NotFound /> },
+  { path: '/sm', element: <Dashboard /> },
   { path: '/info', element: <StyleInfo /> },
 ];

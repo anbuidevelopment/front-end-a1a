@@ -3,7 +3,6 @@ import { AppProvider } from '@/provider/app';
 import { Provider } from 'react-redux';
 import { store } from '@/store/store';
 import { AppRoutes } from '@/routes';
-import { AxiosErrorComponent } from '@/components/Layout';
 import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
 import { blue } from '@mui/material/colors';
 import { SnackbarProvider } from 'notistack';
@@ -104,14 +103,12 @@ function App() {
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
-        <Provider store={store}>
           <SnackbarProvider anchorOrigin={{ vertical: 'top', horizontal: 'center' }}>
             <CssBaseline />
             <AppProvider>
               <AppRoutes />
             </AppProvider>
           </SnackbarProvider>
-        </Provider>
       </ThemeProvider>
     </ColorModeContext.Provider>
   );

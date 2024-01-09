@@ -1,10 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-import notificationReducer from './notifications';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 
 export const store = configureStore({
   reducer: {
-    notifications: notificationReducer,
+    // notifications: notificationReducer,
   },
 });
 

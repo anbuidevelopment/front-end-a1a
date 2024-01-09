@@ -1,19 +1,17 @@
-import { useAppDispatch, useAppSelector } from '@/store/store';
-import { dismissNotification } from '@/store/notifications';
 import { Notification } from './Notification';
+import { useNotificationStore } from '@/store/notifications';
 
 export const Notifications = () => {
-  const notifications = useAppSelector((state) => state.notifications.notifications);
-  const dispatch = useAppDispatch();
-
-  function handleDismiss(id: string) {
-    dispatch(dismissNotification(id));
-  }
+  const { notifications, dismissNotification } = useNotificationStore();
 
   return (
-    <div aria-live={'assertive'}>
+    <div>
       {notifications.map((notification) => (
-        <Notification key={notification.id} notification={notification} onDismiss={handleDismiss} />
+        <Notification
+          key={notification.id}
+          notification={notification}
+          onDismiss={dismissNotification}
+        />
       ))}
     </div>
   );

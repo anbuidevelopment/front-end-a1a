@@ -6,16 +6,15 @@ import { HelmetProvider } from 'react-helmet-async';
 import { ErrorBoundary } from 'react-error-boundary';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { queryClient } from '@/lib/react-query';
-import { AxiosErrorComponent } from '@/components/Layout';
 
 const ErrorFallback = () => {
   return (
     <div
-      className='text-red-500 w-screen h-screen flex flex-col justify-center items-center'
-      role='alert'
+      className="text-red-500 w-screen h-screen flex flex-col justify-center items-center"
+      role="alert"
     >
-      <h2 className='text-lg font-semibold'>Ooops, something went wrong :( </h2>
-      <Button className='mt-4' onClick={() => window.location.assign(window.location.origin)}>
+      <h2 className="text-lg font-semibold">Ooops, something went wrong :( </h2>
+      <Button className="mt-4" onClick={() => window.location.assign(window.location.origin)}>
         Refresh
       </Button>
     </div>
@@ -40,8 +39,7 @@ export const AppProvider = ({ children }: AppProviderProps) => {
           <QueryClientProvider client={queryClient}>
             {/*{process.env.NODE_ENV !== 'test' && <ReactQueryDevtools />}*/}
             <Notifications />
-            <AxiosErrorComponent />
-            <Router>{children}</Router>
+              <Router>{children}</Router>
           </QueryClientProvider>
         </HelmetProvider>
       </ErrorBoundary>

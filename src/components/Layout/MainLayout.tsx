@@ -13,6 +13,7 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useDisclosure } from '@/hooks/useDisclosure';
+import { Menu } from '@/components/Elements/Drawer/Menu';
 
 type MainLayoutProps = {
   children: React.ReactNode;
@@ -40,7 +41,7 @@ export const MainLayout = ({ children }: MainLayoutProps) => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Mini variant drawer
+            Downtime
           </Typography>
         </Toolbar>
       </AppBar>
@@ -52,6 +53,7 @@ export const MainLayout = ({ children }: MainLayoutProps) => {
           </IconButton>
         </DrawerHeader>
         <Divider />
+        <Menu open={isOpen} />
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />

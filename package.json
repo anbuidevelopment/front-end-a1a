@@ -28,7 +28,7 @@
     "react-query-auth": "^2.3.0",
     "react-redux": "^9.0.4",
     "react-router-dom": "^6.21.1",
-    "react-scripts": "5.0.1",
+    "react-scripts": "^5.0.1",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4",
     "zod": "^3.22.4"
@@ -72,11 +72,11 @@
     "@storybook/test": "^7.6.6",
     "autoprefixer": "^9.8.8",
     "eslint-plugin-storybook": "^0.6.15",
-    "postcss": "^8.4.32",
+    "postcss": "^8.4.33",
     "prettier": "^3.1.1",
     "prop-types": "^15.8.1",
     "storybook": "^7.6.6",
-    "tailwindcss": "^3.4.0",
+    "tailwindcss": "^3.4.1",
     "webpack": "^5.89.0"
   }
 }

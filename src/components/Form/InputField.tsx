@@ -10,7 +10,10 @@ interface OutlinedInputCustomProps extends StandardProps<InputBaseProps> {
 
 export const InputField = ((props: OutlinedInputCustomProps) => {
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter' && {}) {
+    if (e.key === 'Enter') {
+      if (props.onEnterPress) {
+        props.onEnterPress();
+      }
     }
   };
   return (

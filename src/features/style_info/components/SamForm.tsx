@@ -10,36 +10,42 @@ function SamForm({ formData, onChange }: FormStyleDataInfo) {
       label: 'Cutting SMV',
       value: formData.cuttingSMV || '',
       nameData: 'cuttingSMV',
+      type:'number',
       onChange: onChange,
     },
     {
       label: 'Sewing',
       value: formData.sewing || '',
       nameData: 'sewing',
+      type:'number',
       onChange: onChange,
     },
     {
       label: 'Inspect',
       value: formData.inspect || '',
       nameData: 'inspect',
+      type:'number',
       onChange: onChange,
     },
     {
       label: 'Press',
       value: formData.press || '',
       nameData: 'press',
+      type:'number',
       onChange: onChange,
     },
     {
       label: 'Finishing',
       value: formData.finishing || '',
       nameData: 'finishing',
+      type:'number',
       onChange: onChange,
     },
     {
       label: 'Total Sew IPF SMV',
       value: formData.totalSewIPFSMV || '',
       nameData: 'totalSewIPFSMV',
+      type:'number',
       onChange: onChange,
     },
   ];
@@ -57,6 +63,7 @@ function SamForm({ formData, onChange }: FormStyleDataInfo) {
               <Grid key={index} item xs={12} md={3}>
                 <InputField
                   fullWidth={true}
+                  type={item.type}
                   onChange={item.onChange}
                   label={item.label}
                   value={item.value}

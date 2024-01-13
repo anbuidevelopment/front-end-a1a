@@ -7,20 +7,23 @@ function PrintForm({formData,onChange}:FormStyleDataInfo) {
 
   const items = [{
     label: 'Screen Pr. Position',
-    value: formData.pSPosition || '',
+    value: formData.screenPrintPosition || '',
     nameData: 'pSPosition',
+    type:'number',
     onChange: onChange,
   },
     {
       label: 'Screen Pr. Printer',
-      value: formData.pSPrinter || '',
+      value: formData.screenPrintPrinter || '',
       nameData: 'pSPrinter',
+      type:'text',
       onChange: onChange,
     },
     {
       label: 'Screen Pr. Fabric Item/PartNo',
-      value: formData.pSItem || '',
+      value: formData.screenPrintItem || '',
       nameData: 'pSItem',
+      type:'text',
       onChange: onChange,
     },
   ];
@@ -38,6 +41,7 @@ function PrintForm({formData,onChange}:FormStyleDataInfo) {
               <InputField
                 onChange={item.onChange}
                 fullWidth={true}
+                type={item.type}
                 id={item.nameData}
                 name={item.nameData}
                 value={item.value}

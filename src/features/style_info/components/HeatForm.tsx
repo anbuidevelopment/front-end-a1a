@@ -10,24 +10,28 @@ function HeatForm({formData,onChange}:FormStyleDataInfo) {
       label: 'HT Small',
       value: formData.htSmall || '',
       nameData: 'htSmall',
+      type:'number',
       onChange: onChange,
     },
     {
       label: 'HT Big',
       value: formData.htBig || '',
       nameData: 'htBig',
+      type:'number',
       onChange: onChange,
     },
     {
       label: 'HT Total Position',
       value: formData.htTotalPosition || '',
       nameData: 'htTotalPosition',
+      type:'number',
       onChange: onChange,
     },
     {
       label: 'HT Embroidery Backing',
       value: formData.htEmbBacking || '',
       nameData: 'htEmbBacking',
+      type:'number',
       onChange: onChange,
     },
   ]
@@ -45,6 +49,7 @@ function HeatForm({formData,onChange}:FormStyleDataInfo) {
             <Grid key={index} item xs={12} md={3}>
             <InputField
               fullWidth={true}
+              type={item.type}
               onChange={item.onChange}
               id={item.nameData}
               name={item.nameData}

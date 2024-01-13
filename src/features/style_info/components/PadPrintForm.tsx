@@ -7,14 +7,16 @@ function PadPrintForm({formData,onChange}:FormStyleDataInfo) {
   const items = [
     {
       label: 'PadPrint Position',
-      value: formData.pPadPosition || '',
+      value: formData.padPrintPosition || '',
       nameData: 'pPadPosition',
+      type:'number',
       onChange: onChange,
     },
     {
       label: 'PadPrint Total SMV',
-      value: formData.pPadTotalSMV || '',
+      value: formData.padPrintTotalSMV || '',
       nameData: 'pPadTotalSMV',
+      type:'number',
       onChange: onChange,
     },
   ];
@@ -31,6 +33,7 @@ function PadPrintForm({formData,onChange}:FormStyleDataInfo) {
             <Grid key={index} item xs={12} md={3}>
               <InputField
                 onChange={item.onChange}
+                type={item.type}
                 fullWidth={true}
                 name={item.nameData}
                 id={item.nameData}

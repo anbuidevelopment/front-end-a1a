@@ -7,38 +7,44 @@ function BondForm({formData,onChange}:FormStyleDataInfo) {
   const items = [
     {
       label: 'Bonding Process',
-      value: formData.bProcess || '',
+      value: formData.bondingProcess || '',
       nameData: 'bProcess',
+      type:'text',
       onChange: onChange,
     },
     {
       label: 'Bonding Position',
-      value: formData.bPosition || '',
+      value: formData.bondingPosition || '',
       nameData: 'bPosition',
+      type:'number',
       onChange: onChange,
     },
     {
       label: 'Bonding Total SMV',
-      value: formData.bTotalSMV || '',
+      value: formData.bondingTotalSMV || '',
       nameData: 'bTotalSMV',
+      type:'number',
       onChange: onChange,
     },
     {
       label: 'Laser Position',
-      value: formData.lPosition || '',
+      value: formData.laserPosition || '',
       nameData: 'lPosition',
+      type:'number',
       onChange: onChange,
     },
     {
       label: 'Laser Total SMV',
-      value: formData.lTotalSMV || '',
+      value: formData.laserTotalSMV || '',
       nameData: 'lTotalSMV',
+      type:'number',
       onChange: onChange,
     },
     {
       label: 'Total Bonding SMV',
-      value: formData.bondTotalSMV || '',
+      value: formData.totalBondingSMV || '',
       nameData: 'bondTotalSMV',
+      type:'number',
       onChange: onChange,
     },
   ];
@@ -56,6 +62,7 @@ function BondForm({formData,onChange}:FormStyleDataInfo) {
               <InputField
                 fullWidth={true}
                 onChange={item.onChange}
+                type={item.type}
                 name={item.nameData}
                 id={item.nameData}
                 value={item.value}

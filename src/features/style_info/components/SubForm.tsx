@@ -7,20 +7,23 @@ function SubForm({ formData,onChange  }: FormStyleDataInfo) {
   const items = [
     {
       label: 'Sublimation Position',
-      value: formData.pSPosition || '',
+      value: formData.sublimationPosition || '',
       nameData: 'pSPosition',
+      type:'number',
       onChange: onChange,
     },
     {
       label: 'Sublimation Printer',
-      value: formData.pSPrinter || '',
+      value: formData.sublimationPrinter || '',
       nameData: 'pSPrinter',
+      type:'text',
       onChange: onChange,
     },
     {
       label: 'Sublimation Fabric Item/PartNo',
-      value: formData.pSItem || '',
+      value: formData.screenSublimationItem || '',
       nameData: 'pSItem',
+      type:'text',
       onChange: onChange,
     },
   ];

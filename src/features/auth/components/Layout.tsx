@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Head } from '@/components/Head';
 
 import { Avatar, Grid } from '@mui/material';
+import * as process from 'process';
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -35,7 +36,7 @@ export const Layout = ({ children, title }: LayoutProps) => {
           <Avatar
             variant={'square'}
             alt={'Login'}
-            src={'/static/images/avatars/office.JPG'}
+            src={process.env.PUBLIC_URL + '/static/images/avatars/office.JPG'}
             sx={{ height: '100%', width: '100%', borderRadius: '16px 0 0 10px' }}
           />
         </Grid>

@@ -9,24 +9,28 @@ function EmbForm({formData,onChange}:FormStyleDataInfo) {
       label: 'EMB Position',
       value: formData.embPosition || '',
       nameData: 'embPosition',
+      type:'number',
       onChange: onChange,
     },
     {
       label: 'EMB Badge Logo',
       value: formData.embBadgeLogo || '',
       nameData: 'embBadgeLogo',
+      type:'number',
       onChange: onChange,
     },
     {
       label: 'EMB Total Stitch',
       value: formData.embTotalStitch || '',
       nameData: 'embTotalStitch',
+      type:'number',
       onChange: onChange,
     },
     {
       label: 'EMB Total SMV',
       value: formData.embTotalSMV || '',
       nameData: 'embTotalSMV',
+      type:'number',
       onChange: onChange,
     },
   ]
@@ -44,6 +48,7 @@ function EmbForm({formData,onChange}:FormStyleDataInfo) {
               <InputField
                 onChange={item.onChange}
                 fullWidth={true}
+                type={item.type}
                 id={item.nameData}
                 name={item.nameData}
                 value={item.value}

@@ -14,7 +14,7 @@ export const ColorModeContext = createContext({
 
 function App() {
 
-  const [mode, setMode] = useState<'light' | 'dark'>('dark');
+  const [mode, setMode] = useState<'light' | 'dark'>('light');
   const colorMode = useMemo(
     () => ({
       toggleColorMode: () => {
@@ -96,6 +96,28 @@ function App() {
               },
             },
           },
+          MuiInputBase:{
+            styleOverrides:{
+              root:{
+                fontWeight:'lighter'
+              }
+            }
+          },
+          MuiTab:{
+            styleOverrides:{
+              root:{
+                fontWeight:'bold',
+              }
+            }
+          },
+          MuiFormLabel:{
+            styleOverrides:{
+              root:{
+                fontWeight:'lighter'
+              }
+            }
+          },
+
         },
       }),
     [mode],

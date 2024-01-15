@@ -1,6 +1,6 @@
 import { Stack } from '@mui/material';
 import { ContentLayout, MainLayout } from '@/components/Layout';
-import { DashBoardFilter } from '@/features/dashboard/components/DashBoard';
+import { DashboardFilter } from '@/features/dashboard/components/Dashboard';
 import { useOverView } from '@/hooks/useOverView';
 import { useStyleDetail } from '@/hooks/useStyleDetail';
 
@@ -17,7 +17,7 @@ export const DashBoard = () => {
     <Stack direction={'column'}>
       <MainLayout>
         <ContentLayout title={'Dashboard'}>
-          <DashBoardFilter
+          <DashboardFilter
             paginationModelOnChange={handleChangePaginationModel}
             handleSetParamsSearch={handleSetParamsSearch}
             gridDataInfo={gridDataInfo}

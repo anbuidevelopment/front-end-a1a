@@ -29,6 +29,7 @@
 //   );
 // };
 import {Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Button} from '@mui/material'
+import { CloseSharp } from '@mui/icons-material';
 
 interface DialogProps {
   open: boolean
@@ -60,7 +61,7 @@ export function MuiDialog({open, setOpen, title, content, fullscreen,percentScre
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button variant={'outlined'} onClick={() => setOpen(false)}>Cancel</Button>
+        <Button startIcon={<CloseSharp />} variant={'outlined'} onClick={() => setOpen(false)}>Cancel</Button>
       </DialogActions>
     </Dialog>
   )

@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import {
+  convertToTitleCase,
   GetFilterInfo,
   GetOverViewInfo,
   GridDataInfo,
@@ -9,9 +10,12 @@ import { GridColDef, GridPaginationModel } from '@mui/x-data-grid';
 import { loadDashBoard } from '@/features/dashboard/api/dashboard';
 import dayjs from 'dayjs';
 import { loadSearchDashBoard } from '@/features/dashboard/api/searchoverview';
+import { useUser } from '@/lib/auth';
 
 export const useOverView = () => {
 
+  const user=useUser()
+  let customerCode=user?.data?.customerCode === undefined ? 'AD' : user.data.customerCode
   const [searchStatus, setSearchStatus] = useState<boolean>(false);
 
   const [dashBoardDto, setDashBoardDto] = useState<TableInfo | null>(null);
@@ -22,11 +26,12 @@ export const useOverView = () => {
     totalElements: 0,
   });
 
+
   const [paramsGetOverView, setParamsGetOverView] = useState<GetOverViewInfo>({
     pStyleMasterCode: '',
     pSeason: '',
     pStage: '',
-    pCustomerCode: 'AD',
+    pCustomerCode: customerCode,
     pProductType: '',
     pFactoryAllocation: '',
     pMerAccountName: '',
@@ -44,7 +49,7 @@ export const useOverView = () => {
           pFactoryAllocation: searchValue.value,
           pSeason: '',
           pStage: '',
-          pCustomerCode: 'AD',
+          pCustomerCode: customerCode,
           pProductType: '',
           pStyleMasterCode: '',
           pMerAccountName: '',
@@ -56,7 +61,7 @@ export const useOverView = () => {
           pFactoryAllocation: '',
           pSeason: '',
           pStage: '',
-          pCustomerCode: 'AD',
+          pCustomerCode: customerCode,
           pProductType: '',
           pStyleMasterCode: '',
           pMerAccountName: searchValue.value,
@@ -68,7 +73,7 @@ export const useOverView = () => {
           pFactoryAllocation: '',
           pSeason: '',
           pStage: '',
-          pCustomerCode: 'AD',
+          pCustomerCode: customerCode,
           pProductType: searchValue.value,
           pStyleMasterCode: '',
           pMerAccountName: '',
@@ -80,7 +85,7 @@ export const useOverView = () => {
           pFactoryAllocation: '',
           pSeason: '',
           pStage: '',
-          pCustomerCode: 'AD',
+          pCustomerCode: customerCode,
           pProductType: '',
           pStyleMasterCode: searchValue.value,
           pMerAccountName: '',
@@ -92,7 +97,7 @@ export const useOverView = () => {
           pFactoryAllocation: '',
           pSeason: '',
           pStage: searchValue.value,
-          pCustomerCode: 'AD',
+          pCustomerCode: customerCode,
           pProductType: '',
           pStyleMasterCode: '',
           pMerAccountName: '',
@@ -104,7 +109,7 @@ export const useOverView = () => {
           pFactoryAllocation: '',
           pSeason: '',
           pStage: '',
-          pCustomerCode: 'AD',
+          pCustomerCode: customerCode,
           pProductType: '',
           pStyleMasterCode: '',
           pMerAccountName: '',
@@ -141,14 +146,14 @@ export const useOverView = () => {
   useEffect(() => {
     const columnsHeader: GridColDef[] = (dashBoardDto?.headers || []).map((header) => ({
       field: header,
-      headerName: header,
-      maxWidth:
+      headerName: convertToTitleCase(header),
+      width:
         header === 'styleMasterId' || header === 'season' || header === 'stage' || header === 'optionNo'
           ? 100
-          : header === 'tacRouteNumber' || header === 'a1aRouteNumber'
+          : header === 'tacRouteNumber' || header === 'a1aRouteNumber' || header==='factoryAllocation'
             ? 130
-            : 1000,
-      flex: 1,
+            : 200,
+
       headerClassName: 'col-header',
       renderCell: (params) => (
         <>

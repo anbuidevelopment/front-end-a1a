@@ -28,18 +28,18 @@ export const UserBoxCard = () => {
 
   const items = [
     {
+      text: 'User Info',
+      icon: <VerifiedUserSharp fontSize={'medium'} />,
+      to: '/user',
+      onClick: () => {
+      },
+    },
+    {
       text: 'Log out',
       icon: <LogoutSharp fontSize={'medium'} />,
       to: '',
       onClick: () => {
         logout.mutate({});
-      },
-    },
-    {
-      text: 'User Infor',
-      icon: <VerifiedUserSharp fontSize={'medium'} />,
-      to: '/user',
-      onClick: () => {
       },
     },
   ];

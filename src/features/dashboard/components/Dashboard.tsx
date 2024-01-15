@@ -7,7 +7,7 @@ import { MuiDialog } from '@/components/Elements';
 import { StyleInfoForm } from '@/features/style_info/components/StyleInfoForm';
 import { useStyleDetail } from '@/hooks/useStyleDetail';
 
-export const DashBoardFilter = ({
+export const DashboardFilter = ({
                                   paramsGrid,
                                   paginationModelOnChange,
                                   gridDataInfo,
@@ -46,7 +46,6 @@ export const DashBoardFilter = ({
         },
       }}
     >
-      <Button onClick={handleClick}>Click</Button>
       {gridDataInfo.rows.length > 0 ? (
         <DataGrid
           sx={{

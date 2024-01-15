@@ -1,6 +1,6 @@
-import { Box, Button, ButtonGroup, Card, CardContent, Grid, Tab } from '@mui/material';
+import { Box, Button, ButtonGroup, Grid, Tab } from '@mui/material';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSnackbar } from 'notistack';
 import SamForm from '@/features/style_info/components/SamForm';
 import SubForm from '@/features/style_info/components/SubForm';
@@ -13,14 +13,11 @@ import { useStyleInfo } from '@/hooks/useStyleInfo';
 import { StyleForm } from '@/features/style_info/components/StyleForm';
 import {
   FormStyleDetailDto,
-  StyleInfoDataAutoComplete,
-  StyleInfoDataInputText,
   StyleMasterConfigData,
 } from '@/features/style_info';
-import { UpdateRequestDto, updateStyleMaster } from '@/features/style_info/api/update';
+import { UpdateRequestDto } from '@/features/style_info/api/update';
 import { useUser } from '@/lib/auth';
-import { UseStyleConfigData } from '@/hooks/useStyleConfigData';
-import { MuiDialog } from '@/components/Elements';
+import { FileUploadSharp, UpdateSharp } from '@mui/icons-material';
 
 export const StyleInfoForm = ({ styleDetailDto }: FormStyleDetailDto) => {
 
@@ -105,8 +102,8 @@ export const StyleInfoForm = ({ styleDetailDto }: FormStyleDetailDto) => {
         screenPrintItem: styleInfoDataInputText.screenPrintItem,
       },
     ];
-    console.log('params:', params)
-    console.log('request', updateStyleConfigData)
+    console.log('params:', params);
+    console.log('request', updateStyleConfigData);
     // const response = await updateStyleMaster(params, updateStyleConfigData)
     // console.log(response)
   };
@@ -176,10 +173,16 @@ export const StyleInfoForm = ({ styleDetailDto }: FormStyleDetailDto) => {
           }}
         >
           <ButtonGroup aria-label='small button group'>
-            <Button variant={'outlined'} onClick={handleClickUpdate}
+            <Button variant={'contained'}
+                    startIcon={<UpdateSharp />}
+                    sx={{ backgroundColor: '#0487D9' }}
+                    onClick={handleClickUpdate}
                     disabled={disableBtnUpdate}>Update</Button>
-            <Button variant={'outlined'} onClick={handleClickAddNew} disabled={disableBtnAddNew}>Add
-              new</Button>
+            <Button variant={'contained'}
+                    startIcon={<FileUploadSharp />}
+                    sx={{ backgroundColor: '#FDCF76', color: 'black' }}
+                    onClick={handleClickAddNew}
+                    disabled={disableBtnAddNew}>Add new</Button>
           </ButtonGroup>
 
         </Box>

@@ -5,6 +5,7 @@ export type AuthAccount = {
   position: string;
   department: string;
   email: string;
+  customerCode:string;
   gender: string;
   active: boolean;
 };

@@ -37,7 +37,7 @@ function Status404() {
         </Box>
         <Container maxWidth='sm'>
           <Card sx={{ textAlign: 'center', mt: 3, p: 4 }}>
-            <Button href="javascript:window.location" variant='outlined'>
+            <Button href='/' variant='contained'>
               Go to homepage
             </Button>
           </Card>

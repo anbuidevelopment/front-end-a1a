@@ -53,9 +53,9 @@ export const Menu = ({ open }: MenuProps) => {
                   <ListItemText primary={item.text}
                                 sx={{ opacity: open ? 1 : 0 }}
                                 primaryTypographyProps={{
-                                  fontWeight: 'normal',
+                                  fontWeight: 'bold',
                                   variant: 'body2',
-                                  color: theme.palette.mode === 'dark' ? '#FDCF76' : '#909090',
+                                  color: theme.palette.mode === 'dark' ? '#FDCF76' : '#333333',
                                 }} />
                 </ListItemButton>
 

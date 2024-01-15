@@ -36,15 +36,16 @@ interface DialogProps {
   title?: string
   content?: any
   fullscreen?: boolean
+  percentScreen?:string
 }
 
-export function MuiDialog({open, setOpen, title, content, fullscreen}: DialogProps) {
+export function MuiDialog({open, setOpen, title, content, fullscreen,percentScreen}: DialogProps) {
 
 
   return (
     <Dialog sx={{
-      width: '75%',
-      height: '75%',
+      width: percentScreen,
+      height: percentScreen,
       position: 'absolute',
       top: '50%',
       left: '50%',

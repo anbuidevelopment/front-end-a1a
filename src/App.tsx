@@ -92,6 +92,7 @@ function App() {
             styleOverrides: {
               root: {
                 fontSize: 16,
+                fontWeight:'bold'
               },
             },
           },

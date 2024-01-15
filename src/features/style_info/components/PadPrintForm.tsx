@@ -8,14 +8,14 @@ function PadPrintForm({formData,onChange}:FormStyleDataInfo) {
     {
       label: 'PadPrint Position',
       value: formData.padPrintPosition || '',
-      nameData: 'pPadPosition',
+      nameData: 'padPrintPosition',
       type:'number',
       onChange: onChange,
     },
     {
       label: 'PadPrint Total SMV',
       value: formData.padPrintTotalSMV || '',
-      nameData: 'pPadTotalSMV',
+      nameData: 'padPrintTotalSMV',
       type:'number',
       onChange: onChange,
     },

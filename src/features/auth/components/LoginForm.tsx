@@ -42,12 +42,16 @@ export function LoginForm({ onSuccess }: LoginFormProps) {
   };
 
   const onSubmitLogin = () => {
+
     login.mutate({ username: username, password: password });
+    setTimeout(() => {
+      onSuccess();
+    }, 3000);
   };
 
-  if (login.isSuccess) {
-    onSuccess();
-  }
+  // if (login.isSuccess) {
+  //   onSuccess();
+  // }
 
   return (
     <Grid item xs={12} md={6} justifyContent={'center'} alignItems={'center'}>
@@ -64,7 +68,7 @@ export function LoginForm({ onSuccess }: LoginFormProps) {
               id="outline-username"
               label="Username"
               value={username}
-              onChange={event => setUsername(event.target.value)}
+              onChange={event => setUsername(event.target.value.toUpperCase())}
               type="text"
               startAdornment={<PersonOutline sx={{ mr: 1 }} />}
             />

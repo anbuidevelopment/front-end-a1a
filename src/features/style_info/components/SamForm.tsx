@@ -43,8 +43,8 @@ function SamForm({ formData, onChange }: FormStyleDataInfo) {
     },
     {
       label: 'Total Sew IPF SMV',
-      value: formData.totalSewIPFSMV || '',
-      nameData: 'totalSewIPFSMV',
+      value: formData.totalSIPFSMV || '',
+      nameData: 'totalSIPFSMV',
       type:'number',
       onChange: onChange,
     },

@@ -78,6 +78,8 @@ export interface GridDataGetOverViewInfo {
   paginationModelOnChange: (model: GridPaginationModel) => void,
   gridDataInfo: GridDataInfo
   handleSetParamsSearch: (searchValue: GetFilterInfo) => void
+  handleSetParamsStyleDetail:(id:number)=>void
+  styleDetailDto:StyleDetailInfo|null
 }
 
 export interface StyleDetailContent {

@@ -45,7 +45,7 @@ export const CustomToolbar = ({deleteStatus,idDelete,handleSetParamsSearch}:Cust
     });
     setLoading(false);
 
-    const mapColumns=['Season','ProductType','FactoryAllocation','Stage','MerAccountName','StyleMasterCode','Status','OptionNo','BondingProcess','A1ARouteNumber','CustomerPatternCode','TACRouteNumber']
+    const mapColumns=['Season','ProductType','FactoryAllocation','Stage','MerAccountName','StyleMasterCode','Status','OptionNo','BondingProcess','A1ARouteNumber','CustomerPatternCode','TACRouteNumber','CustomerCode']
     const mapToDto=(column:string)=>
       (result?.content ||[])
         .filter((filter:GetFilterInfo)=>filter.columnName===column)

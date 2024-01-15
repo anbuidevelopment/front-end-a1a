@@ -16,7 +16,7 @@ export const useStyleInfo = () => {
     sewing:  undefined,
     finishing:  undefined,
     inspect:  undefined,
-    totalSewIPFSMV:  undefined,
+    totalSIPFSMV:  undefined,
     screenPrintPosition:  undefined,
     screenPrintPrinter:  undefined,
     screenPrintItem:  undefined,
@@ -27,7 +27,7 @@ export const useStyleInfo = () => {
     htSmall:  undefined,
     htBig:  undefined,
     htTotalPosition:  undefined,
-    htEmbBacking:  undefined,
+    htEmbroideryBacking:  undefined,
     bondingProcess:  undefined,
     bondingPosition:  undefined,
     bondingTotalSMV:  undefined,
@@ -52,9 +52,14 @@ export const useStyleInfo = () => {
   );
 
   const [styleInfoDataAutoComplete, setStyleInfoDataAutoComplete] = useState<StyleInfoDataAutoComplete>({
-    smCode: {
+    styleMasterId:{
+      id:1,
+      columnName:'styleMasterId',
+      value:''
+    },
+    styleMasterCode: {
       id: 1,
-      columnName: 'smCode',
+      columnName: 'styleMasterCode',
       value: '',
     },
     stage: {
@@ -62,9 +67,9 @@ export const useStyleInfo = () => {
       columnName: 'stage',
       value: '',
     },
-    merName: {
+    merAccountName: {
       id: 1,
-      columnName: 'merName',
+      columnName: 'merAccountName',
       value: '',
     },
     status: {
@@ -72,9 +77,9 @@ export const useStyleInfo = () => {
       columnName: 'status',
       value: '',
     },
-    options: {
+    optionNo: {
       id: 1,
-      columnName: 'options',
+      columnName: 'optionNo',
       value: '',
     },
     productType: {
@@ -82,14 +87,19 @@ export const useStyleInfo = () => {
       columnName: 'productType',
       value: '',
     },
-    cuspCode: {
+    customerCode: {
       id: 1,
-      columnName: 'cuspCode',
+      columnName: 'customerCode',
       value: '',
     },
-    a1aRouteNum: {
+    customerPatternCode:{
+      id:1,
+      columnName:'customerPatternCode',
+      value:''
+    },
+    a1aRouteNumber: {
       id: 1,
-      columnName: 'a1aRouteNum',
+      columnName: 'a1aRouteNumber',
       value: '',
     },
     season: {
@@ -97,14 +107,14 @@ export const useStyleInfo = () => {
       columnName: 'season',
       value: '',
     },
-    tacRouteNum: {
+    tacRouteNumber: {
       id: 1,
-      columnName: 'tacRouteNum',
+      columnName: 'tacRouteNumber',
       value: '',
     },
-    facAllocation: {
+    factoryAllocation: {
       id: 1,
-      columnName: 'facAllocation',
+      columnName: 'factoryAllocation',
       value: '',
     },
   });
@@ -117,7 +127,7 @@ export const useStyleInfo = () => {
       sewing: e?.content.sewing,
       finishing: e?.content.finishing,
       inspect: e?.content.inspect,
-      totalSewIPFSMV: e?.content.totalSIPFSMV,
+      totalSIPFSMV: e?.content.totalSIPFSMV,
       screenPrintPosition: e?.content.screenPrintPosition,
       screenPrintPrinter: e?.content.screenPrintPrinter,
       screenPrintItem: e?.content.screenPrintItem,
@@ -128,7 +138,7 @@ export const useStyleInfo = () => {
       htSmall: e?.content.htSmall,
       htBig: e?.content.htBig,
       htTotalPosition: e?.content.htTotalPosition,
-      htEmbBacking: e?.content.htEmbroideryBacking,
+      htEmbroideryBacking: e?.content.htEmbroideryBacking,
       bondingProcess: e?.content.bondingProcess,
       bondingPosition: e?.content.bondingPosition,
       bondingTotalSMV: e?.content.bondingTotalSMV,
@@ -147,9 +157,14 @@ export const useStyleInfo = () => {
   const handleSetAutocompleteDto = useCallback((e: StyleDetailInfo) => {
     setStyleInfoDataAutoComplete((prevState) => ({
       ...prevState,
-      smCode: {
+     styleMasterId:{
+       id: 1,
+       columnName: 'styleMasterCode',
+       value: e?.content.styleMasterId.toString(),
+     },
+      styleMasterCode: {
         id: 1,
-        columnName: 'smCode',
+        columnName: 'styleMasterCode',
         value: e?.content.styleMasterCode,
       },
       stage: {
@@ -157,9 +172,9 @@ export const useStyleInfo = () => {
         columnName: 'stage',
         value: e?.content.stage,
       },
-      merName: {
+      merAccountName: {
         id: 1,
-        columnName: 'merName',
+        columnName: 'merAccountName',
         value: e?.content.merAccountName,
       },
       status: {
@@ -167,9 +182,9 @@ export const useStyleInfo = () => {
         columnName: 'status',
         value: e?.content.status,
       },
-      options: {
+      optionNo: {
         id: 1,
-        columnName: 'options',
+        columnName: 'optionNo',
         value: e?.content.optionNo,
       },
       productType: {
@@ -177,14 +192,19 @@ export const useStyleInfo = () => {
         columnName: 'productType',
         value: e?.content.productType,
       },
-      cuspCode: {
+      customerCode: {
         id: 1,
-        columnName: 'cuspCode',
+        columnName: 'customerCode',
         value: '',
       },
-      a1aRouteNum: {
+      customerPatternCode:{
+        id:1,
+        columnName:'customerPatternCode',
+        value:''
+      },
+      a1aRouteNumber: {
         id: 1,
-        columnName: 'a1aRouteNum',
+        columnName: 'a1aRouteNumber',
         value: e?.content.a1aRouteNumber,
       },
       season: {
@@ -192,9 +212,9 @@ export const useStyleInfo = () => {
         columnName: 'season',
         value: e?.content.season,
       },
-      tacRouteNum: {
+      tacRouteNumber: {
         id: 1,
-        columnName: 'tacRouteNum',
+        columnName: 'tacRouteNumber',
         value: e?.content.tacRouteNumber,
       },
       facAllocation: {

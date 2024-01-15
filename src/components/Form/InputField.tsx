@@ -15,6 +15,9 @@ export const InputField = ((props: OutlinedInputCustomProps) => {
         props.onEnterPress();
       }
     }
+    if (props.type === 'number' && ['e', '+', '-'].includes(e.key.toLowerCase())) {
+      e.preventDefault();
+    }
   };
   return (
     <FormControl fullWidth={props.fullWidth}>

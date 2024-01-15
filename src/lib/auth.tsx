@@ -23,7 +23,7 @@ function _mapAccountFromToken(): AuthAccount {
 // }
 
 async function handleUserResponse(data: AccountResponse) {
-  // console.log('Testing: ', data);
+   // console.log('Testing: ', data);
   storage.setToken(data.access_token);
   // console.log('Testing: ', JSON.parse(atob(storage.getToken().split('.')[1])));
   return _mapAccountFromToken();
@@ -43,7 +43,7 @@ async function loginFn(data: LoginRequestDTO) {
 
 async function logoutFn() {
   storage.clearToken();
-  window.location.replace(window.location.origin + "/sm" as unknown as string);
+  window.location.replace(window.location.origin as unknown as string);
 }
 
 async function registerFn(data: RegisterCredentialsDTO) {

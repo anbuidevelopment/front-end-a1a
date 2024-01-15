@@ -142,7 +142,6 @@ export const useOverView = () => {
     const columnsHeader: GridColDef[] = (dashBoardDto?.headers || []).map((header) => ({
       field: header,
       headerName: header,
-      minWidth: 50,
       maxWidth:
         header === 'styleMasterId' || header === 'season' || header === 'stage' || header === 'optionNo'
           ? 100

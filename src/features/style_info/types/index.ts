@@ -13,7 +13,7 @@ export interface FormStyleDataInfoAutoComplete {
 }
 
 export interface FormStyleDetailDto {
-  styleDetailDto:StyleDetailInfo|null
+  styleDetailDto: StyleDetailInfo | null;
 }
 
 export interface StyleInfoDataInputText {
@@ -22,7 +22,7 @@ export interface StyleInfoDataInputText {
   sewing: number | undefined,
   finishing: number | undefined,
   inspect: number | undefined,
-  totalSewIPFSMV: number | undefined,
+  totalSIPFSMV: number | undefined,
   screenPrintPosition: number | undefined,
   screenPrintPrinter: string | undefined,
   screenPrintItem: string | undefined,
@@ -33,7 +33,7 @@ export interface StyleInfoDataInputText {
   htSmall: number | undefined,
   htBig: number | undefined,
   htTotalPosition: number | undefined,
-  htEmbBacking: number | undefined,
+  htEmbroideryBacking: number | undefined,
   bondingProcess: string | undefined,
   bondingPosition: number | undefined,
   bondingTotalSMV: number | undefined,
@@ -49,15 +49,42 @@ export interface StyleInfoDataInputText {
 }
 
 export interface StyleInfoDataAutoComplete {
-  smCode: FilterFormat | null,
+  styleMasterId: FilterFormat | null,
+  styleMasterCode: FilterFormat | null,
   stage: FilterFormat | null,
-  merName: FilterFormat | null,
+  merAccountName: FilterFormat | null,
   status: FilterFormat | null,
-  options: FilterFormat | null,
+  optionNo: FilterFormat | null,
   productType: FilterFormat | null,
-  cuspCode: FilterFormat | null,
-  a1aRouteNum: FilterFormat | null,
+  customerCode: FilterFormat | null,
+  customerPatternCode: FilterFormat | null
+  a1aRouteNumber: FilterFormat | null,
   season: FilterFormat | null,
-  tacRouteNum: FilterFormat | null,
-  facAllocation: FilterFormat | null,
+  tacRouteNumber: FilterFormat | null,
+  factoryAllocation: FilterFormat | null,
 }
+
+export interface StyleMasterConfigData extends StyleInfoDataInputText {
+  refStyleMasterId: number | undefined,
+  isActive: number | undefined,
+  styleMasterId: string | undefined,
+  styleMasterCode: string | undefined,
+  stage: string | undefined,
+  merAccountName: string | undefined,
+  status: string | undefined,
+  optionNo: string | undefined,
+  productType: string | undefined,
+  customerCode: string | undefined,
+  customerPatternCode: string | undefined,
+  a1aRouteNumber: string | undefined,
+  season: string | undefined,
+  tacRouteNumber: string | undefined,
+  factoryAllocation: string | undefined,
+}
+
+export interface UpdateResponse {
+  code: number,
+  message: string,
+  data: string | null,
+}
+

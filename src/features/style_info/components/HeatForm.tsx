@@ -29,8 +29,8 @@ function HeatForm({formData,onChange}:FormStyleDataInfo) {
     },
     {
       label: 'HT Embroidery Backing',
-      value: formData.htEmbBacking || '',
-      nameData: 'htEmbBacking',
+      value: formData.htEmbroideryBacking || '',
+      nameData: 'htEmbroideryBacking',
       type:'number',
       onChange: onChange,
     },

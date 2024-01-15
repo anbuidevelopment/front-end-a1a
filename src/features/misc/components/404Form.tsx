@@ -11,6 +11,7 @@ import {
 } from '@mui/material';
 import { Helmet } from 'react-helmet-async';
 import SearchTwoToneIcon from '@mui/icons-material/SearchTwoTone';
+import * as process from 'process';
 
 
 function Status404() {
@@ -21,7 +22,7 @@ function Status404() {
       </Helmet>
       <Container maxWidth='md'>
         <Box textAlign='center'>
-          <img alt='404' height={180} src='/static/images/status/404.svg' />
+          <img alt='404' height={180} src={process.env.PUBLIC_URL+ '/static/images/status/404.svg'} />
           <Typography variant='h2' sx={{ my: 2 }}>
             The page you were looking for doesn't exist.
           </Typography>
@@ -36,7 +37,7 @@ function Status404() {
         </Box>
         <Container maxWidth='sm'>
           <Card sx={{ textAlign: 'center', mt: 3, p: 4 }}>
-            <Button href="javascript:window.location.replace('/sm')" variant='outlined'>
+            <Button href="javascript:window.location" variant='outlined'>
               Go to homepage
             </Button>
           </Card>

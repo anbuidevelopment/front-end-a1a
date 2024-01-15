@@ -10,7 +10,7 @@ import { NotFound } from '@/features/misc';
 export const AppRoutes = () => {
   const auth = useUser();
 
-  const commonRoutes = [{ path: '/sm', element: <Login /> }];
+  const commonRoutes = [{ path: '/', element: <Login /> }];
 
   const otherRoutes = [{ path: '/*', element: <NotFound /> }];
 

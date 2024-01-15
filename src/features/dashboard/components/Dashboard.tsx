@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { GridDataGetOverViewInfo } from '../types';
-import { DataGrid } from '@mui/x-data-grid';
+import { GridDataGetOverViewInfo, StyleDetailInfo } from '../types';
+import { DataGrid, GridRowModel, GridRowSelectionModel } from '@mui/x-data-grid';
 import { Button, CircularProgress, Paper } from '@mui/material';
 import { CustomToolbar } from '@/features/dashboard/components/CustomToolbar';
 import { MuiDialog } from '@/components/Elements';
@@ -12,20 +12,22 @@ export const DashBoardFilter = ({
                                   paginationModelOnChange,
                                   gridDataInfo,
                                   handleSetParamsSearch,
+                                  handleSetParamsStyleDetail,
+                                  styleDetailDto,
                                 }: GridDataGetOverViewInfo) => {
-
-  const {styleDetailDto}=useStyleDetail()
+  //const {styleDetailDto}=useStyleDetail()
   const [selectedIds, setSelectedIds] = useState<any>([]);
   const [deleteStatus, setDeleteStatus] = useState<boolean>(true);
-  const [isDialog,setIsDialog]=useState<boolean>(false)
+  const [isDialog, setIsDialog] = useState<boolean>(false);
+
   function handleClick() {
     console.log(gridDataInfo.rows);
   }
 
-  function handleDoubleClick() {
-    console.log('double click')
-    setIsDialog(true)
-  }
+  const handleDoubleClick = (rowSelectionModel: GridRowModel) => {
+    handleSetParamsStyleDetail(rowSelectionModel.row.styleMasterId);
+    setIsDialog(true);
+  };
 
   return (
     <Paper
@@ -47,6 +49,9 @@ export const DashBoardFilter = ({
       <Button onClick={handleClick}>Click</Button>
       {gridDataInfo.rows.length > 0 ? (
         <DataGrid
+          sx={{
+            fontWeight:'bold'
+          }}
           initialState={{
             columns: {
               columnVisibilityModel: {
@@ -58,7 +63,7 @@ export const DashBoardFilter = ({
           getRowId={(row) => row.id}
           pageSizeOptions={[10, 25, 50]}
           paginationMode={'server'}
-          paginationModel={ { page: paramsGrid.pPageIndex, pageSize: paramsGrid.pPageSize }}
+          paginationModel={{ page: paramsGrid.pPageIndex, pageSize: paramsGrid.pPageSize }}
           onPaginationModelChange={paginationModelOnChange}
           columns={gridDataInfo.columns.filter((column) => !column.hideable)}
           rowCount={gridDataInfo.totalElements || 0}
@@ -80,15 +85,15 @@ export const DashBoardFilter = ({
             setSelectedIds(selectedRows);
             rowSelectionModel.length > 0 ? setDeleteStatus(false) : setDeleteStatus(true);
           }}
-           onRowDoubleClick={handleDoubleClick}
+          onRowDoubleClick={(rowSelectionModel: GridRowModel) => handleDoubleClick(rowSelectionModel)}
         />
       ) : (
         <div className={'w-full h-48 flex justify-center items-center'}>
           <CircularProgress style={{}} />
         </div>
       )}
-      <MuiDialog open={isDialog} setOpen={setIsDialog} title={'Style Master Description'}
-                 content={<StyleInfoForm styleDetailDto={styleDetailDto}/>}/>
+      <MuiDialog percentScreen={'75%'} open={isDialog} setOpen={setIsDialog} title={'Style Master Description'}
+                 content={<StyleInfoForm styleDetailDto={styleDetailDto} />} />
     </Paper>
   );
 };

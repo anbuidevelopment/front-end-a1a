@@ -36,7 +36,7 @@ axios.interceptors.response.use(
       if (storage.getToken() != null) {
         storage.clearToken();
         setTimeout(() => {
-          window.location.replace((window.location.origin + '/sm') as unknown as string);
+          window.location.replace((window.location.origin) as unknown as string);
         }, 2000);
       }
     }

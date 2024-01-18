@@ -40,9 +40,9 @@ export const MainLayout =({ children }: MainLayoutProps) => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant='h6' noWrap component='div'>
-            Mini variant drawer
-          </Typography>
+          {/*<Typography variant='h6' noWrap component='div'>*/}
+          {/*  Mini variant drawer*/}
+          {/*</Typography>*/}
           <Box sx={{ flexGrow: 0, ml: 'auto' }}>
             <UserBoxCard />
           </Box>

@@ -32,14 +32,14 @@ axios.interceptors.response.use(
       type: 'error',
       message: 'Error : ' + message,
     });
-    if (error.response.status === 403) {
-      if (storage.getToken() != null) {
-        storage.clearToken();
-        setTimeout(() => {
-          window.location.replace((window.location.origin) as unknown as string);
-        }, 2000);
-      }
-    }
+    // if (error.response.status === 403) {
+    //   if (storage.getToken() != null) {
+    //     storage.clearToken();
+    //     setTimeout(() => {
+    //       window.location.replace((window.location.origin) as unknown as string);
+    //     }, 2000);
+    //   }
+    // }
     return Promise.reject(error);
   }
 );

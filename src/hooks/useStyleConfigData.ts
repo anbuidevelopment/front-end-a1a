@@ -45,9 +45,9 @@ export const UseStyleConfigData = () => {
       sublimationPrinter: '',
       refStyleMasterId: undefined,
       isActive: 1,
-      bondingItem: undefined,
-      screenSublimationItem: undefined,
-      screenPrintItem: undefined,
+      styleMasterBondingItem: undefined,
+      styleMasterScreenSublimationItem: undefined,
+      styleMasterScreenPrintItem: undefined,
     }],
   );
   const setStyleConfig = useCallback((dataAutoComplete: StyleInfoDataAutoComplete, dataInputText: StyleInfoDataInputText, refStyleMasterId: number | undefined, isActive: number | undefined) => {
@@ -94,9 +94,9 @@ export const UseStyleConfigData = () => {
         sublimationPrinter: dataInputText.sublimationPrinter,
         refStyleMasterId: refStyleMasterId,
         isActive: isActive,
-        bondingItem: dataInputText.bondingItem,
-        screenSublimationItem: dataInputText.screenSublimationItem,
-        screenPrintItem: dataInputText.screenPrintItem,
+        styleMasterBondingItem: dataInputText.bondingItem,
+        styleMasterScreenSublimationItem: dataInputText.screenSublimationItem,
+        styleMasterScreenPrintItem: dataInputText.screenPrintItem,
       },
     ];
     setStyleConfigData(updateStyleConfigData);

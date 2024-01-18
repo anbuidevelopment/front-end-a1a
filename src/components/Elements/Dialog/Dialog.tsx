@@ -29,7 +29,7 @@
 //   );
 // };
 import {Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Button} from '@mui/material'
-import { CloseSharp } from '@mui/icons-material';
+import { CloseSharp, DoneSharp } from '@mui/icons-material';
 
 interface DialogProps {
   open: boolean
@@ -38,9 +38,10 @@ interface DialogProps {
   content?: any
   fullscreen?: boolean
   percentScreen?:string
+  buttonAccept?:boolean
 }
 
-export function MuiDialog({open, setOpen, title, content, fullscreen,percentScreen}: DialogProps) {
+export function MuiDialog({open, setOpen, title, content, fullscreen,percentScreen,buttonAccept}: DialogProps) {
 
 
   return (
@@ -61,6 +62,7 @@ export function MuiDialog({open, setOpen, title, content, fullscreen,percentScre
         </DialogContentText>
       </DialogContent>
       <DialogActions>
+        {buttonAccept ? <Button  sx={{ backgroundColor: '#FDCF76', color: 'black' }} startIcon={<DoneSharp />} variant={'contained'} onClick={() => setOpen(false)}>Accept</Button> : null}
         <Button startIcon={<CloseSharp />} variant={'outlined'} onClick={() => setOpen(false)}>Cancel</Button>
       </DialogActions>
     </Dialog>

@@ -15,7 +15,7 @@ import {
   FormStyleDetailDto,
   StyleMasterConfigData,
 } from '@/features/style_info';
-import { UpdateRequestDto } from '@/features/style_info/api/update';
+import { UpdateRequestDto, updateStyleMaster } from '@/features/style_info/api/update';
 import { useUser } from '@/lib/auth';
 import { FileUploadSharp, UpdateSharp } from '@mui/icons-material';
 
@@ -97,15 +97,15 @@ export const StyleInfoForm = ({ styleDetailDto }: FormStyleDetailDto) => {
         sublimationPrinter: styleInfoDataInputText.sublimationPrinter,
         refStyleMasterId: Number(styleInfoDataAutoComplete.styleMasterId?.value),
         isActive: 1,
-        bondingItem: styleInfoDataInputText.bondingItem,
-        screenSublimationItem: styleInfoDataInputText.screenSublimationItem,
-        screenPrintItem: styleInfoDataInputText.screenPrintItem,
+        styleMasterBondingItem: styleInfoDataInputText.bondingItem?.replace(/\n/g, '|').replace(/^\||\|$/g, ''),
+        styleMasterScreenSublimationItem: styleInfoDataInputText.screenSublimationItem?.replace(/\n/g, '|').replace(/^\||\|$/g, ''),
+        styleMasterScreenPrintItem: styleInfoDataInputText.screenPrintItem?.replace(/\n/g, '|').replace(/^\||\|$/g, ''),
       },
     ];
     console.log('params:', params);
     console.log('request', updateStyleConfigData);
-    // const response = await updateStyleMaster(params, updateStyleConfigData)
-    // console.log(response)
+    const response = await updateStyleMaster(params, updateStyleConfigData)
+    console.log(response)
   };
 
   const handleClickAddNew = (e: React.SyntheticEvent) => {

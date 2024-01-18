@@ -1,4 +1,14 @@
-import { Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Tooltip, useTheme } from '@mui/material';
+import {
+  Avatar,
+  Divider,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Tooltip,
+  useTheme,
+} from '@mui/material';
 import { Link } from 'react-router-dom';
 import { AddCircleSharp, HomeSharp } from '@mui/icons-material';
 import { useDisclosure } from '@/hooks/useDisclosure';
@@ -15,14 +25,15 @@ export const Menu = ({ open }: MenuProps) => {
   const menuItems = [
     {
       text: 'Style Master',
-      icon: <HomeSharp
-        sx={{ width: 35, height: 35 }} />,//<Avatar sx={{width: 35, height: 35}} variant={'square'} src={process.env.PUBLIC_URL +'/static/images/avatars/home.png'}/>,
+      icon: <Avatar sx={{ width: 45, height: 45 }} variant={'square'}
+                    src={process.env.PUBLIC_URL + '/static/images/menu/home.png'} />,
       to: '/',
       onClick: openMenu,
     },
     {
-      text: 'Style Information',
-      icon: <AddCircleSharp sx={{ width: 35, height: 35 }} />,//<Avatar sx={{width: 35, height: 35}} variant={'square'} src={process.env.PUBLIC_URL +'/static/images/avatars/additem.png'}/>,
+      text: 'Style Info',
+      icon: <Avatar sx={{ width: 45, height: 45 }} variant={'square'}
+                    src={process.env.PUBLIC_URL + '/static/images/menu/preview.png'} />,
       to: '/info',
       onClick: openMenu,
     },
@@ -41,7 +52,7 @@ export const Menu = ({ open }: MenuProps) => {
                 <ListItemButton
                   key={item.text}
                   sx={{
-                    maxHeight: 35,
+                    maxHeight: 49,
                     justifyContent: open ? 'initial' : 'center',
                     px: 2.5,
                     m: 1,
@@ -53,7 +64,7 @@ export const Menu = ({ open }: MenuProps) => {
                   <ListItemText primary={item.text}
                                 sx={{ opacity: open ? 1 : 0 }}
                                 primaryTypographyProps={{
-                                  fontWeight: 'bold',
+                                  fontWeight: 'normal',
                                   variant: 'body2',
                                   color: theme.palette.mode === 'dark' ? '#FDCF76' : '#333333',
                                 }} />

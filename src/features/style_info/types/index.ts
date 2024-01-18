@@ -64,7 +64,7 @@ export interface StyleInfoDataAutoComplete {
   factoryAllocation: FilterFormat | null,
 }
 
-export interface StyleMasterConfigData extends StyleInfoDataInputText {
+export interface StyleMasterConfigData {
   refStyleMasterId: number | undefined,
   isActive: number | undefined,
   styleMasterId: string | undefined,
@@ -80,6 +80,35 @@ export interface StyleMasterConfigData extends StyleInfoDataInputText {
   season: string | undefined,
   tacRouteNumber: string | undefined,
   factoryAllocation: string | undefined,
+  cuttingSMV: number | undefined,
+  press: number | undefined,
+  sewing: number | undefined,
+  finishing: number | undefined,
+  inspect: number | undefined,
+  totalSIPFSMV: number | undefined,
+  screenPrintPosition: number | undefined,
+  screenPrintPrinter: string | undefined,
+  styleMasterScreenPrintItem: string | undefined,
+  embPosition: number | undefined,
+  embBadgeLogo: number | undefined,
+  embTotalStitch: number | undefined,
+  embTotalSMV: number | undefined,
+  htSmall: number | undefined,
+  htBig: number | undefined,
+  htTotalPosition: number | undefined,
+  htEmbroideryBacking: number | undefined,
+  bondingProcess: string | undefined,
+  bondingPosition: number | undefined,
+  bondingTotalSMV: number | undefined,
+  laserPosition: number | undefined,
+  laserTotalSMV: number | undefined,
+  totalBondingSMV: number | undefined,
+  padPrintPosition: number | undefined,
+  padPrintTotalSMV: number | undefined,
+  sublimationPosition: number | undefined,
+  sublimationPrinter: string | undefined,
+  styleMasterScreenSublimationItem: string | undefined,
+  styleMasterBondingItem: string | undefined,
 }
 
 export interface UpdateResponse {

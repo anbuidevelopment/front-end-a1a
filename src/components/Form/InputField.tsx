@@ -1,11 +1,19 @@
-import { FormControl, InputLabel, InternalStandardProps as StandardProps, OutlinedInput } from '@mui/material';
+import {
+  FormControl,
+  FormHelperText,
+  InputLabel,
+  InternalStandardProps as StandardProps,
+  OutlinedInput,
+} from '@mui/material';
 import React from 'react';
 import { InputBaseProps } from '@mui/material/InputBase';
 
 interface OutlinedInputCustomProps extends StandardProps<InputBaseProps> {
   onEnterPress?: () => void;
-  onChange: (v : any) => void;
+  onChange: (a : any) => void;
+  onDoubleClick?:(e:any)=>void;
   label?: string;
+  helperText?:string
 }
 
 export const InputField = ((props: OutlinedInputCustomProps) => {
@@ -40,7 +48,9 @@ export const InputField = ((props: OutlinedInputCustomProps) => {
         type={props.type}
         disabled={props.disabled}
         onKeyDown={handleKeyPress}
+        onDoubleClick={props.onDoubleClick}
       />
+      <FormHelperText sx={{color:'#0487D9'}}>{props.helperText}</FormHelperText>
     </FormControl>
   );
 });

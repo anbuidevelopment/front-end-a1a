@@ -11,6 +11,7 @@ function BondForm({formData,onChange}:FormStyleDataInfo) {
       nameData: 'bondingProcess',
       type:'text',
       onChange: onChange,
+      multi:false
     },
     {
       label: 'Bonding Position',
@@ -18,6 +19,7 @@ function BondForm({formData,onChange}:FormStyleDataInfo) {
       nameData: 'bondingPosition',
       type:'number',
       onChange: onChange,
+      multi:false
     },
     {
       label: 'Bonding Total SMV',
@@ -25,6 +27,7 @@ function BondForm({formData,onChange}:FormStyleDataInfo) {
       nameData: 'bondingTotalSMV',
       type:'number',
       onChange: onChange,
+      multi:false
     },
     {
       label: 'Laser Position',
@@ -32,6 +35,7 @@ function BondForm({formData,onChange}:FormStyleDataInfo) {
       nameData: 'laserPosition',
       type:'number',
       onChange: onChange,
+      multi:false
     },
     {
       label: 'Laser Total SMV',
@@ -39,6 +43,7 @@ function BondForm({formData,onChange}:FormStyleDataInfo) {
       nameData: 'laserTotalSMV',
       type:'number',
       onChange: onChange,
+      multi:false
     },
     {
       label: 'Total Bonding SMV',
@@ -46,6 +51,15 @@ function BondForm({formData,onChange}:FormStyleDataInfo) {
       nameData: 'totalBondingSMV',
       type:'number',
       onChange: onChange,
+      multi:false
+    },
+    {
+      label: 'Bonding Item',
+      value: formData.bondingItem || '',
+      nameData: 'bondingItem',
+      type:'text',
+      onChange: onChange,
+      multi:true
     },
   ];
 
@@ -65,7 +79,9 @@ function BondForm({formData,onChange}:FormStyleDataInfo) {
                 type={item.type}
                 name={item.nameData}
                 id={item.nameData}
-                value={item.value}
+                multiline={item.multi}
+                value={item.multi ? item.value?.toString().split('|').join('\n'):item.value}
+                rows={item.multi ? item.value?.toString().split('|').length:1}
                 label={item.label}
               />
             </Grid>

@@ -149,10 +149,10 @@ export const useOverView = () => {
       headerName: convertToTitleCase(header),
       width:
         header === 'styleMasterId' || header === 'season' || header === 'stage' || header === 'optionNo'
-          ? 100
+          ? 130
           : header === 'tacRouteNumber' || header === 'a1aRouteNumber' || header==='factoryAllocation'
-            ? 130
-            : 200,
+            ? 160
+            : 220,
 
       headerClassName: 'col-header',
       renderCell: (params) => (
@@ -177,6 +177,5 @@ export const useOverView = () => {
     paramsGetOverView,
     handleChangePaginationModel,
     handleSetParamsSearch,
-
   };
 };

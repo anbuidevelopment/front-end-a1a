@@ -11,6 +11,7 @@ function PrintForm({formData,onChange}:FormStyleDataInfo) {
     nameData: 'screenPrintPosition',
     type:'number',
     onChange: onChange,
+    multi:false
   },
     {
       label: 'Screen Pr. Printer',
@@ -18,6 +19,7 @@ function PrintForm({formData,onChange}:FormStyleDataInfo) {
       nameData: 'screenPrintPrinter',
       type:'text',
       onChange: onChange,
+      multi:false
     },
     {
       label: 'Screen Pr. Fabric Item/PartNo',
@@ -25,6 +27,7 @@ function PrintForm({formData,onChange}:FormStyleDataInfo) {
       nameData: 'screenPrintItem',
       type:'text',
       onChange: onChange,
+      multi:true
     },
   ];
 
@@ -44,7 +47,9 @@ function PrintForm({formData,onChange}:FormStyleDataInfo) {
                 type={item.type}
                 id={item.nameData}
                 name={item.nameData}
-                value={item.value}
+                multiline={item.multi}
+                value={item.multi ? item.value?.toString().split('|').join('\n'):item.value}
+                rows={item.multi ? item.value?.toString().split('|').length:1}
                 label={item.label}
                 />
             </Grid>

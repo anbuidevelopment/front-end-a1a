@@ -195,12 +195,12 @@ export const useStyleInfo = () => {
       customerCode: {
         id: 1,
         columnName: 'customerCode',
-        value: '',
+        value: e.content.customerCode,
       },
       customerPatternCode:{
         id:1,
         columnName:'customerPatternCode',
-        value:''
+        value:e.content.customerPatternCode
       },
       a1aRouteNumber: {
         id: 1,

@@ -20,8 +20,8 @@ import { useUser } from '@/lib/auth';
 
 export const CustomToolbar = ({ deleteStatus, idDelete, handleSetParamsSearch }: CustomToolbarStatus) => {
 
-  const user=useUser()
-  let customerCode=user?.data?.customerCode === undefined ? 'AD' : user.data.customerCode
+  const user = useUser();
+  let customerCode = user?.data?.customerCode === undefined ? 'AD' : user.data.customerCode;
   const [pFromDate, setPFromDate] = useState<Dayjs | null>(dayjs().subtract(2, 'months'));
   const [pToDate, setPToDate] = useState<Dayjs | null>(dayjs());
   const [isNeedLoading, setLoading] = useState(true);
@@ -125,25 +125,34 @@ export const CustomToolbar = ({ deleteStatus, idDelete, handleSetParamsSearch }:
                                     setValue={(newValue) => setSearchValue(newValue)} />
         </Grid>
         <Grid item xs={12} md={1.2}>
-          <Button onClick={handleClickSearch} fullWidth sx={{ height: '54px' }} variant={'outlined'}
+          <Button onClick={handleClickSearch}
+                  fullWidth
+                  sx={{ height: '54px', backgroundColor: '#FDCF76', color: 'black' }}
+                  variant={'contained'}
                   startIcon={<SearchOutlined />}>search</Button>
         </Grid>
         <Grid item xs={12} md={1.3}>
-          <Button onClick={handleClickRefresh} fullWidth sx={{ height: '54px' }} variant={'outlined'}
+          <Button onClick={handleClickRefresh}
+                  fullWidth sx={{ height: '54px', backgroundColor: '#FDCF76', color: 'black' }}
+                  variant={'contained'}
                   startIcon={<RefreshOutlined />}>refresh</Button>
         </Grid>
         <Grid item xs={12} md={1.8}>
-          <Button fullWidth sx={{ height: '54px' }} variant={'outlined'} startIcon={<FileUploadOutlined />}>Import
-            excel</Button>
+          <Button fullWidth
+                  sx={{ height: '54px', backgroundColor: '#FDCF76', color: 'black' }}
+                  variant={'contained'}
+                  startIcon={<FileUploadOutlined />}>Import excel</Button>
         </Grid>
         <Grid item xs={12} md={1.8}>
-          <Button fullWidth sx={{ height: '54px' }} variant={'outlined'} startIcon={<FileDownloadOutlined />}>Export
-            excel</Button>
+          <Button fullWidth
+                  sx={{ height: '54px', backgroundColor: '#FDCF76', color: 'black' }}
+                  variant={'contained'}
+                  startIcon={<FileDownloadOutlined />}>Export excel</Button>
         </Grid>
         <Grid item xs={12} md={1.3}>
           <Button onClick={handleClickDelete} disabled={deleteStatus} fullWidth
-                  sx={{ height: '54px', color: 'red', borderColor: 'red' }}
-                  variant={'outlined'} startIcon={<DeleteOutline />}>delete</Button>
+                  sx={{ height: '54px', color: 'white', backgroundColor: 'red' }}
+                  variant={'contained'} startIcon={<DeleteOutline />}>delete</Button>
         </Grid>
       </Grid>
 

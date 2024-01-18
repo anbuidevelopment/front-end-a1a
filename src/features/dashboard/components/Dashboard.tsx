@@ -41,8 +41,21 @@ export const DashboardFilter = ({
           fontWeight: 'bold',
         },
         '& .col-header': {
-          backgroundColor: '#3C7363',
+          backgroundColor: '#0487D9',
           color: 'white',
+        },
+        '&.MuiDataGrid-columnHeader': {
+          backgroundColor: '#0487D9',
+          color: 'white',
+        },
+        '& .MuiCheckbox-root.Mui-checked.MuiCheckbox-indeterminate': {
+          color: 'white',
+        },
+        '& .MuiCheckbox-root': {
+          color: '#0487D9',
+        },
+        '& .MuiDataGrid-checkboxInput': {
+          color: '#0487D9',
         },
       }}
     >

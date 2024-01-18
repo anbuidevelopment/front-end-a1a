@@ -88,6 +88,7 @@ export interface StyleDetailContent {
   season: string,
   stage: string,
   optionNo: string,
+  customerCode:string,
   customerPatternCode: string,
   tacRouteNumber: string,
   a1aRouteNumber: string,

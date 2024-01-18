@@ -77,7 +77,7 @@ export const UserBoxCard = () => {
             <IconButton sx={{ p: 0 }}>
               <Avatar
                 alt='Image'
-                src={user.data?.gender === 'FEMALE' ? process.env.PUBLIC_URL + '/static/images/avatars/woman.png' : process.env.PUBLIC_URL + '/static/images/avatars/man.png'} />
+                src={user.data?.gender === 'FEMALE' ? process.env.PUBLIC_URL + '/static/images/avatars/female.png' : process.env.PUBLIC_URL + '/static/images/avatars/male.png'} />
             </IconButton>
             <Typography justifyContent={'center'} alignItems={'center'} display={'flex'}>
               {user.data?.fullName}

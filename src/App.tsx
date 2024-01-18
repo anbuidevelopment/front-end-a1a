@@ -6,6 +6,7 @@ import { AppRoutes } from '@/routes';
 import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
 import { blue } from '@mui/material/colors';
 import { SnackbarProvider } from 'notistack';
+import { customStyles } from '@/utils/format';
 
 export const ColorModeContext = createContext({
   toggleColorMode: () => {
@@ -28,13 +29,13 @@ function App() {
       createTheme({
         palette: {
           primary: {
-            main: blue[500],
+            main: '#0487D9',
           },
           mode,
           ...(mode === 'dark'
             ? {
               primary: {
-                main: '#2196F5',
+                main: '#0487D9',
               },
               text: {
                 primary: '#D7D7D9',
@@ -117,7 +118,6 @@ function App() {
               }
             }
           },
-
         },
       }),
     [mode],

@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import storage from '@/utils/storage';
 import { ColorModeContext } from '@/context/color-mode-context';
@@ -32,7 +32,7 @@ export function Charts() {
     (state: any) => state.downtime.chartData
   );
 
-  const getData = async (data: any) => {
+  const getData = useCallback(async (data: any) => {
     let loadData: any = {
       p: data.page || 0,
       s: data.pageSize || 100,
@@ -48,13 +48,13 @@ export function Charts() {
       console.log(error);
     }
     setTimeout(() => getData(data), 5 * 60 * 1000);
-  };
+  }, []);
 
   useEffect(() => {
     if (factory) {
       getData({ page, pageSize, factory, startDate, endDate });
     }
-  }, [page, pageSize, factory, startDate, endDate]);
+  }, [page, pageSize, factory, startDate, endDate, getData]);
 
   useEffect(() => {
     if (downTimeData && downTimeData.headers && downTimeData.contents) {
@@ -151,7 +151,6 @@ export function Charts() {
           </button>
           <FullScreen handle={handle} className={ctx.mode === 'light' ? 'lightMode' : ''}>
             <h1>{factory || ''}</h1>
-
             <>
               {charts.length > 0 ? (
                 <BarChart

@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 import notificationReducer from './notifications';
+import downtimeReducer from './downtime';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 
 export const store = configureStore({
   reducer: {
     notifications: notificationReducer,
+    downtime: downtimeReducer,
   },
 });
 

@@ -2,7 +2,7 @@
 import { lazyImport } from '@/utils/lazyImport';
 // import { element } from 'prop-types';
 
-const { DashBoard } = lazyImport(() => import('@/features/dashboard'), 'DashBoard');
+const { Dashboard } = lazyImport(() => import('@/features/dashboard'), 'Dashboard');
 
 // const { NotFound } = lazyImport(() => import('@/features/misc'), 'NotFound');
 
@@ -13,7 +13,7 @@ const { ProductionProcess } = lazyImport(() => import('@/features/production_pro
 
 
 export const protectedRoutes = [
-  { path: '/', element: <DashBoard /> },
+  { path: '/', element: <Dashboard /> },
   { path: '/info', element: <StyleInfo /> },
   { path: '/process', element: <ProductionProcess /> },
 ];

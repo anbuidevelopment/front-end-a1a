@@ -15,16 +15,16 @@ import {
   FormStyleDetailDto,
   StyleMasterConfigData,
 } from '@/features/style_info';
-import { UpdateRequestDto, updateStyleMaster } from '@/features/style_info/api/update';
+import { UpdateRequestDto } from '@/features/style_info/api/update';
 import { useUser } from '@/lib/auth';
-import { FileUploadSharp, UpdateSharp } from '@mui/icons-material';
+import { UpdateSharp } from '@mui/icons-material';
+import { customStyles } from '@/utils/format';
 
-export const StyleInfoForm = ({ styleDetailDto }: FormStyleDetailDto) => {
+
+export const StyleInfoForm = ({ styleDetailDto, action }: FormStyleDetailDto) => {
 
   const { enqueueSnackbar } = useSnackbar();
   const [value, onChange] = useState('1');
-  const [disableBtnUpdate, setDisableBtnUpdate] = useState<boolean>(false);
-  const [disableBtnAddNew, setDisableBtnAddNew] = useState<boolean>(false);
 
   const {
     styleInfoDataInputText,
@@ -47,83 +47,81 @@ export const StyleInfoForm = ({ styleDetailDto }: FormStyleDetailDto) => {
   const handleChange = (e: React.SyntheticEvent, newValue: string) => {
     onChange(newValue);
   };
-
+  const updateStyleConfigData: StyleMasterConfigData[] = [
+    {
+      styleMasterId: styleInfoDataAutoComplete.styleMasterId?.value,
+      styleMasterCode: styleInfoDataAutoComplete.styleMasterCode?.value,
+      season: styleInfoDataAutoComplete.season?.value,
+      stage: styleInfoDataAutoComplete.stage?.value,
+      optionNo: styleInfoDataAutoComplete.optionNo?.value,
+      customerCode: styleInfoDataAutoComplete.customerCode?.value,
+      customerPatternCode: styleInfoDataAutoComplete.customerPatternCode?.value,
+      tacRouteNumber: styleInfoDataAutoComplete.tacRouteNumber?.value,
+      a1aRouteNumber: styleInfoDataAutoComplete.a1aRouteNumber?.value,
+      productType: styleInfoDataAutoComplete.productType?.value,
+      factoryAllocation: styleInfoDataAutoComplete.factoryAllocation?.value,
+      merAccountName: styleInfoDataAutoComplete.merAccountName?.value,
+      status: styleInfoDataAutoComplete.status?.value,
+      cuttingSMV: styleInfoDataInputText.cuttingSMV,
+      sewing: styleInfoDataInputText.sewing,
+      inspect: styleInfoDataInputText.inspect,
+      press: styleInfoDataInputText.press,
+      finishing: styleInfoDataInputText.finishing,
+      totalSIPFSMV: styleInfoDataInputText.totalSIPFSMV,
+      bondingProcess: styleInfoDataInputText.bondingProcess,
+      bondingPosition: styleInfoDataInputText.bondingPosition,
+      bondingTotalSMV: styleInfoDataInputText.bondingTotalSMV,
+      laserPosition: styleInfoDataInputText.laserPosition,
+      laserTotalSMV: styleInfoDataInputText.laserTotalSMV,
+      totalBondingSMV: styleInfoDataInputText.totalBondingSMV,
+      htSmall: styleInfoDataInputText.htSmall,
+      htBig: styleInfoDataInputText.htBig,
+      htTotalPosition: styleInfoDataInputText.htTotalPosition,
+      htEmbroideryBacking: styleInfoDataInputText.htEmbroideryBacking,
+      embPosition: styleInfoDataInputText.embPosition,
+      embBadgeLogo: styleInfoDataInputText.embBadgeLogo,
+      embTotalStitch: styleInfoDataInputText.embTotalStitch,
+      embTotalSMV: styleInfoDataInputText.embTotalSMV,
+      padPrintPosition: styleInfoDataInputText.padPrintPosition,
+      padPrintTotalSMV: styleInfoDataInputText.padPrintTotalSMV,
+      screenPrintPosition: styleInfoDataInputText.screenPrintPosition,
+      screenPrintPrinter: styleInfoDataInputText.screenPrintPrinter,
+      sublimationPosition: styleInfoDataInputText.sublimationPosition,
+      sublimationPrinter: styleInfoDataInputText.sublimationPrinter,
+      refStyleMasterId: Number(styleInfoDataAutoComplete.styleMasterId?.value),
+      isActive: 1,
+      styleMasterBondingItem: styleInfoDataInputText.bondingItem?.replace(/\n/g, '|').replace(/^\||\|$/g, ''),
+      styleMasterScreenSublimationItem: styleInfoDataInputText.screenSublimationItem?.replace(/\n/g, '|').replace(/^\||\|$/g, ''),
+      styleMasterScreenPrintItem: styleInfoDataInputText.screenPrintItem?.replace(/\n/g, '|').replace(/^\||\|$/g, ''),
+    },
+  ];
+  const params: UpdateRequestDto = {
+    pAction: action,
+    pCreatedBy: user.data?.id != null ? user.data.id : 1,
+    pOutput: 1,
+  };
   const handleClickUpdate = async (e: React.SyntheticEvent) => {
-    const params: UpdateRequestDto = {
-      pAction: 2,
-      pCreatedBy: user.data?.id != null ? user.data.id : 1,
-      pOutput: 1,
-    };
-    const updateStyleConfigData: StyleMasterConfigData[] = [
-      {
-        styleMasterId: styleInfoDataAutoComplete.styleMasterId?.value,
-        styleMasterCode: styleInfoDataAutoComplete.styleMasterCode?.value,
-        season: styleInfoDataAutoComplete.season?.value,
-        stage: styleInfoDataAutoComplete.stage?.value,
-        optionNo: styleInfoDataAutoComplete.optionNo?.value,
-        customerCode: styleInfoDataAutoComplete.customerCode?.value,
-        customerPatternCode: styleInfoDataAutoComplete.customerPatternCode?.value,
-        tacRouteNumber: styleInfoDataAutoComplete.tacRouteNumber?.value,
-        a1aRouteNumber: styleInfoDataAutoComplete.a1aRouteNumber?.value,
-        productType: styleInfoDataAutoComplete.productType?.value,
-        factoryAllocation: styleInfoDataAutoComplete.factoryAllocation?.value,
-        merAccountName: styleInfoDataAutoComplete.merAccountName?.value,
-        status: styleInfoDataAutoComplete.status?.value,
-        cuttingSMV: styleInfoDataInputText.cuttingSMV,
-        sewing: styleInfoDataInputText.sewing,
-        inspect: styleInfoDataInputText.inspect,
-        press: styleInfoDataInputText.press,
-        finishing: styleInfoDataInputText.finishing,
-        totalSIPFSMV: styleInfoDataInputText.totalSIPFSMV,
-        bondingProcess: styleInfoDataInputText.bondingProcess,
-        bondingPosition: styleInfoDataInputText.bondingPosition,
-        bondingTotalSMV: styleInfoDataInputText.bondingTotalSMV,
-        laserPosition: styleInfoDataInputText.laserPosition,
-        laserTotalSMV: styleInfoDataInputText.laserTotalSMV,
-        totalBondingSMV: styleInfoDataInputText.totalBondingSMV,
-        htSmall: styleInfoDataInputText.htSmall,
-        htBig: styleInfoDataInputText.htBig,
-        htTotalPosition: styleInfoDataInputText.htTotalPosition,
-        htEmbroideryBacking: styleInfoDataInputText.htEmbroideryBacking,
-        embPosition: styleInfoDataInputText.embPosition,
-        embBadgeLogo: styleInfoDataInputText.embBadgeLogo,
-        embTotalStitch: styleInfoDataInputText.embTotalStitch,
-        embTotalSMV: styleInfoDataInputText.embTotalSMV,
-        padPrintPosition: styleInfoDataInputText.padPrintPosition,
-        padPrintTotalSMV: styleInfoDataInputText.padPrintTotalSMV,
-        screenPrintPosition: styleInfoDataInputText.screenPrintPosition,
-        screenPrintPrinter: styleInfoDataInputText.screenPrintPrinter,
-        sublimationPosition: styleInfoDataInputText.sublimationPosition,
-        sublimationPrinter: styleInfoDataInputText.sublimationPrinter,
-        refStyleMasterId: Number(styleInfoDataAutoComplete.styleMasterId?.value),
-        isActive: 1,
-        styleMasterBondingItem: styleInfoDataInputText.bondingItem?.replace(/\n/g, '|').replace(/^\||\|$/g, ''),
-        styleMasterScreenSublimationItem: styleInfoDataInputText.screenSublimationItem?.replace(/\n/g, '|').replace(/^\||\|$/g, ''),
-        styleMasterScreenPrintItem: styleInfoDataInputText.screenPrintItem?.replace(/\n/g, '|').replace(/^\||\|$/g, ''),
-      },
-    ];
+
     console.log('params:', params);
     console.log('request', updateStyleConfigData);
-    const response = await updateStyleMaster(params, updateStyleConfigData)
-    console.log(response)
-  };
-
-  const handleClickAddNew = (e: React.SyntheticEvent) => {
-    setDisableBtnAddNew(true);
-    setTimeout(function() {
-      setDisableBtnAddNew(false);
-    }, 5000);
-    enqueueSnackbar('Add new', { variant: 'success', anchorOrigin: { vertical: 'bottom', horizontal: 'right' } });
+    // const response = await updateStyleMaster(params, updateStyleConfigData)
+    // console.log(response.message)
+    enqueueSnackbar(action === 2 ? 'Update Complete' : 'Insert Complete', {
+      variant: 'success',
+      anchorOrigin: { vertical: 'bottom', horizontal: 'right' },
+    });
   };
 
   return (
     <Grid container
+          sx={{height:'100%'}}
           justifyContent={'left'}
           alignItems={'stretch'}
           direction={'row'}
           spacing={2}>
+
       <Grid item xs={12} md={12}>
-        <StyleForm formData={styleInfoDataAutoComplete} onChange={handleChangeAutoComplete} />
+        <StyleForm formData={styleInfoDataAutoComplete} onChange={handleChangeAutoComplete} action={action} />
       </Grid>
       <Grid item xs={12} md={12}>
         <Box sx={{ width: '100%', typography: 'body1' }}>
@@ -163,29 +161,11 @@ export const StyleInfoForm = ({ styleDetailDto }: FormStyleDetailDto) => {
           </TabContext>
         </Box>
       </Grid>
-      <Grid item xs={12} md={12} sx={{ position: 'fixed', bottom: '8px' }}>
-        <Box
-          sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-
-          }}
-        >
-          <ButtonGroup aria-label='small button group'>
-            <Button variant={'contained'}
-                    startIcon={<UpdateSharp />}
-                    sx={{ backgroundColor: '#0487D9' }}
-                    onClick={handleClickUpdate}
-                    disabled={disableBtnUpdate}>Update</Button>
-            <Button variant={'contained'}
-                    startIcon={<FileUploadSharp />}
-                    sx={{ backgroundColor: '#FDCF76', color: 'black' }}
-                    onClick={handleClickAddNew}
-                    disabled={disableBtnAddNew}>Add new</Button>
-          </ButtonGroup>
-
-        </Box>
+      <Grid item xs={12} md={1} sx={{textAlign:'left'}}>
+        <Button
+          fullWidth
+          startIcon={<UpdateSharp />}
+          onClick={handleClickUpdate}>Save</Button>
       </Grid>
     </Grid>
   );

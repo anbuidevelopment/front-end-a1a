@@ -1,9 +1,9 @@
 import { Card, CardContent, Grid } from '@mui/material';
 import { AutoCompleteMui } from '@/features/style_info/components/AutoComplete/AutoComplete';
-import { FormStyleDataInfoAutoComplete, FormStyleDetailDto } from '@/features/style_info';
+import { FormStyleDataInfoAutoComplete } from '@/features/style_info';
 import { storageFilter } from '@/utils/storage';
 
-export const StyleForm = ({ formData, onChange }: FormStyleDataInfoAutoComplete) => {
+export const StyleForm = ({ formData, onChange,action }: FormStyleDataInfoAutoComplete) => {
   const items = [
     {
       name: 'Style Master Code',
@@ -11,6 +11,7 @@ export const StyleForm = ({ formData, onChange }: FormStyleDataInfoAutoComplete)
       value: formData.styleMasterCode || null || undefined,
       options: storageFilter.getData('StyleMasterCode'),
       onChange: onChange,
+      disable: action===2 ? true : false
     },
     {
       name: 'Stage',
@@ -18,6 +19,7 @@ export const StyleForm = ({ formData, onChange }: FormStyleDataInfoAutoComplete)
       value: formData.stage || null || undefined,
       options: storageFilter.getData('Stage'),
       onChange: onChange,
+      disable: action===2 ? true : false
     },
     {
       name: 'Customer Code',
@@ -25,6 +27,7 @@ export const StyleForm = ({ formData, onChange }: FormStyleDataInfoAutoComplete)
       value: formData.customerCode || null || undefined,
       options: storageFilter.getData('CustomerCode'),
       onChange: onChange,
+      disable: false
     },
     {
       name: 'Customer Pattern Code',
@@ -32,6 +35,7 @@ export const StyleForm = ({ formData, onChange }: FormStyleDataInfoAutoComplete)
       value: formData.customerPatternCode || null || undefined,
       options: storageFilter.getData('CustomerPatternCode'),
       onChange: onChange,
+      disable: false
     },
     {
       name: 'A1A Route Number',
@@ -39,6 +43,7 @@ export const StyleForm = ({ formData, onChange }: FormStyleDataInfoAutoComplete)
       value: formData.a1aRouteNumber || null || undefined,
       options: storageFilter.getData('A1ARouteNumber'),
       onChange: onChange,
+      disable: false
     },
     {
       name: 'Product Type',
@@ -46,6 +51,7 @@ export const StyleForm = ({ formData, onChange }: FormStyleDataInfoAutoComplete)
       value: formData.productType || null || undefined,
       options: storageFilter.getData('ProductType'),
       onChange: onChange,
+      disable: false
     },
     {
       name: 'Factory Allocation',
@@ -53,6 +59,7 @@ export const StyleForm = ({ formData, onChange }: FormStyleDataInfoAutoComplete)
       value: formData.factoryAllocation || null || undefined,
       options: storageFilter.getData('FactoryAllocation'),
       onChange: onChange,
+      disable: false
     },
     {
       name: 'Mer Account Name',
@@ -60,6 +67,7 @@ export const StyleForm = ({ formData, onChange }: FormStyleDataInfoAutoComplete)
       value: formData.merAccountName || null || undefined,
       options: storageFilter.getData('MerAccountName'),
       onChange: onChange,
+      disable: false
     },
     {
       name: 'Status',
@@ -67,6 +75,7 @@ export const StyleForm = ({ formData, onChange }: FormStyleDataInfoAutoComplete)
       value: formData.status || null || undefined,
       options: storageFilter.getData('Status'),
       onChange: onChange,
+      disable: false
     },
     {
       name: 'Season',
@@ -74,6 +83,7 @@ export const StyleForm = ({ formData, onChange }: FormStyleDataInfoAutoComplete)
       value: formData.season || null || undefined,
       options: storageFilter.getData('Season'),
       onChange: onChange,
+      disable: action===2 ? true : false
     },
     {
       name: 'Options',
@@ -81,6 +91,7 @@ export const StyleForm = ({ formData, onChange }: FormStyleDataInfoAutoComplete)
       value: formData.optionNo || null || undefined,
       options: storageFilter.getData('OptionNo'),
       onChange: onChange,
+      disable: action===2 ? true : false
     },
     {
       name: 'Tac Route Number',
@@ -88,6 +99,7 @@ export const StyleForm = ({ formData, onChange }: FormStyleDataInfoAutoComplete)
       value: formData.tacRouteNumber || null || undefined,
       options: storageFilter.getData('TACRouteNumber'),
       onChange: onChange,
+      disable: false
     },
 
   ];
@@ -103,6 +115,7 @@ export const StyleForm = ({ formData, onChange }: FormStyleDataInfoAutoComplete)
             {items.map((item, index) => (
               <Grid key={index} item xs={12} md={3}>
                 <AutoCompleteMui
+                  disabled={item.disable}
                   onChange={item.onChange}
                   value={item.value}
                   label={item.name}

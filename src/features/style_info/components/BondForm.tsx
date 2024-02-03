@@ -1,6 +1,7 @@
 import { Card, CardContent, Grid } from '@mui/material';
 import { InputField } from '@/components/Form';
 import { FormStyleDataInfo } from '@/features/style_info';
+import { splitItem, splitItemJoin } from '@/utils/format';
 
 function BondForm({formData,onChange}:FormStyleDataInfo) {
 
@@ -80,8 +81,8 @@ function BondForm({formData,onChange}:FormStyleDataInfo) {
                 name={item.nameData}
                 id={item.nameData}
                 multiline={item.multi}
-                value={item.multi ? item.value?.toString().split('|').join('\n'):item.value}
-                rows={item.multi ? item.value?.toString().split('|').length:1}
+                value={item.multi ? splitItemJoin(item.value?.toString()):item.value}
+                rows={item.multi ? splitItem(item.value?.toString()).length:1}
                 label={item.label}
               />
             </Grid>

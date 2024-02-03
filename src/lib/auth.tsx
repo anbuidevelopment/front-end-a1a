@@ -38,7 +38,7 @@ async function loadUser() {
 
 async function loginFn(data: LoginRequestDTO) {
   const response = await executeLogin(data);
-  return await handleUserResponse(response);
+  return await handleUserResponse(response.data);
 }
 
 async function logoutFn() {

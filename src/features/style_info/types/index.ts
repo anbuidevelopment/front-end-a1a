@@ -10,10 +10,12 @@ export interface FormStyleDataInfo {
 export interface FormStyleDataInfoAutoComplete {
   formData: StyleInfoDataAutoComplete,
   onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void
+  action:number
 }
 
 export interface FormStyleDetailDto {
   styleDetailDto: StyleDetailInfo | null;
+  action:number
 }
 
 export interface StyleInfoDataInputText {

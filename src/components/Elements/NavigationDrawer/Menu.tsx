@@ -10,9 +10,12 @@ import {
   useTheme,
 } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { AddCircleSharp, HomeSharp } from '@mui/icons-material';
 import { useDisclosure } from '@/hooks/useDisclosure';
 import { Fragment } from 'react';
+import { EditNoteSharp, WorkSharp } from '@mui/icons-material';
+import { customStyles } from '@/utils/format';
+import { LogoClothes } from '@/assets/clothes';
+import { LogoProcess } from '@/assets/process';
 
 
 type MenuProps = {
@@ -25,16 +28,20 @@ export const Menu = ({ open }: MenuProps) => {
   const menuItems = [
     {
       text: 'Style Master',
-      icon: <Avatar sx={{ width: 45, height: 45 }} variant={'square'}
-                    src={process.env.PUBLIC_URL + '/static/images/menu/home.png'} />,
+      icon: <Avatar variant={'circular'} sx={{ backgroundColor: customStyles['color1'] }}> <LogoClothes /></Avatar>,
       to: '/',
       onClick: openMenu,
     },
     {
       text: 'Style Info',
-      icon: <Avatar sx={{ width: 45, height: 45 }} variant={'square'}
-                    src={process.env.PUBLIC_URL + '/static/images/menu/preview.png'} />,
+      icon: <Avatar variant={'circular'} sx={{ backgroundColor: customStyles['color1'] }}> <EditNoteSharp /></Avatar>,
       to: '/info',
+      onClick: openMenu,
+    },
+    {
+      text: 'Production Process',
+      icon: <Avatar variant={'circular'} sx={{ backgroundColor: customStyles['color1'] }}> <LogoProcess /></Avatar>,
+      to: '/process',
       onClick: openMenu,
     },
   ];
@@ -66,7 +73,7 @@ export const Menu = ({ open }: MenuProps) => {
                                 primaryTypographyProps={{
                                   fontWeight: 'normal',
                                   variant: 'body2',
-                                  color: theme.palette.mode === 'dark' ? '#FDCF76' : '#333333',
+                                  // color: '#FFC745',
                                 }} />
                 </ListItemButton>
 

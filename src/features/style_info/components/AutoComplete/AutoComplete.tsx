@@ -22,6 +22,7 @@ export const AutoCompleteMui = ((props: AutoCompleteCustomProps) => {
     <Stack spacing={2}>
       { props.autoCompleteDto !== undefined && (
         <Autocomplete
+          disabled={props.disabled}
           id={props.id}
           options={props.autoCompleteDto}
           sx={{width: props.wi, pb: '3px'}}

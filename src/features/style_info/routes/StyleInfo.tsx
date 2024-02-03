@@ -8,7 +8,7 @@ const {styleDetailDto}=useStyleDetail()
   return (
     <MainLayout>
       <ContentLayout title={'Style Info'}>
-        <StyleInfoForm styleDetailDto={styleDetailDto}/>
+        <StyleInfoForm styleDetailDto={styleDetailDto} action={1}/>
       </ContentLayout>
     </MainLayout>
   );

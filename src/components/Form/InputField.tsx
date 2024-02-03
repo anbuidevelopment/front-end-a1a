@@ -34,7 +34,7 @@ export const InputField = ((props: OutlinedInputCustomProps) => {
       </InputLabel>
       <OutlinedInput
         fullWidth={props.fullWidth}
-        sx={{ borderRadius: '16px', background: 'initial' }}
+        sx={{ background: 'initial' }}
         rows={props.rows}
         multiline={props.multiline}
         id={props.id}

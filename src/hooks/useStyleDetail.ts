@@ -15,7 +15,7 @@ export const useStyleDetail = () => {
     const getData = async () => {
       try {
         const result = await loadStyleDetail(paramsStyleDetail);
-        setStyleDetailDto(result);
+        setStyleDetailDto(result.data);
       } catch (error) {
         console.error(error);
       }

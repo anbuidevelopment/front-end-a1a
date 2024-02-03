@@ -32,6 +32,7 @@ export const MainLayout =({ children }: MainLayoutProps) => {
             aria-label={'open drawer'}
             edge={'start'}
             sx={{
+              color:'#8E54E9',
               ml: 2,
               marginRight: 5,
               ...(isOpen && { display: 'none' }),
@@ -52,7 +53,7 @@ export const MainLayout =({ children }: MainLayoutProps) => {
       <Drawer variant={'permanent'} isOpen={isOpen} onClose={isOpen ? open : close}>
         <DrawerHeader>
           <IconButton onClick={close}>
-            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+            {theme.direction === 'rtl' ? <ChevronRightIcon sx={{color:'#8E54E9'}}/> : <ChevronLeftIcon sx={{color:'#8E54E9'}}/>}
           </IconButton>
         </DrawerHeader>
         <Divider />

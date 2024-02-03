@@ -29,14 +29,14 @@ export const UserBoxCard = () => {
   const items = [
     {
       text: 'User Info',
-      icon: <VerifiedUserSharp fontSize={'medium'} />,
+      icon: <VerifiedUserSharp sx={{ color: '#0487D9' }} />,
       to: '/user',
       onClick: () => {
       },
     },
     {
       text: 'Log out',
-      icon: <LogoutSharp fontSize={'medium'} />,
+      icon: <LogoutSharp sx={{ color: '#0487D9' }} />,
       to: '',
       onClick: () => {
         logout.mutate({});
@@ -66,8 +66,8 @@ export const UserBoxCard = () => {
           }} onClick={() => {
             colorMode.toggleColorMode();
           }}>
-            {theme.palette.mode === 'dark' ? <LightModeSharp sx={{ color: '#909090' }} /> :
-              <DarkModeSharp sx={{ color: '#909090' }} />}
+            {theme.palette.mode === 'dark' ? <LightModeSharp sx={{ color: '#8E54E9' }} /> :
+              <DarkModeSharp sx={{ color: '#8E54E9' }} />}
           </IconButton>
         </ButtonGroup>
       </Box>
@@ -79,7 +79,7 @@ export const UserBoxCard = () => {
                 alt='Image'
                 src={user.data?.gender === 'FEMALE' ? process.env.PUBLIC_URL + '/static/images/avatars/female.png' : process.env.PUBLIC_URL + '/static/images/avatars/male.png'} />
             </IconButton>
-            <Typography justifyContent={'center'} alignItems={'center'} display={'flex'}>
+            <Typography variant={'h3'} justifyContent={'center'} alignItems={'center'} display={'flex'}>
               {user.data?.fullName}
             </Typography>
           </Stack>
@@ -114,7 +114,7 @@ export const UserBoxCard = () => {
                 primary={setting.text}
                 onClick={() => navigate(setting.to)}
                 primaryTypographyProps={{
-                  fontWeight: 'bold',
+                  fontWeight: 'lighter',
                   variant: 'body2',
                 }} />
             </Link>

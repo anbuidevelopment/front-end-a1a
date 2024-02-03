@@ -11,12 +11,13 @@ export const DashBoard = () => {
     handleChangePaginationModel,
     gridDataInfo,
     handleSetParamsSearch,
+    dashBoardDto
   } = useOverView();
   const {handleSetParamsStyleDetail,styleDetailDto}=useStyleDetail()
   return (
     <Stack direction={'column'}>
       <MainLayout>
-        <ContentLayout title={'Dashboard'}>
+        <ContentLayout title={'Style Master'}>
           <DashboardFilter
             paginationModelOnChange={handleChangePaginationModel}
             handleSetParamsSearch={handleSetParamsSearch}
@@ -24,6 +25,7 @@ export const DashBoard = () => {
             paramsGrid={paramsGetOverView}
             handleSetParamsStyleDetail={handleSetParamsStyleDetail}
             styleDetailDto={styleDetailDto}
+            dashBoardDto={dashBoardDto}
           />
         </ContentLayout>
       </MainLayout>

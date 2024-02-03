@@ -8,9 +8,12 @@ const { DashBoard } = lazyImport(() => import('@/features/dashboard'), 'DashBoar
 
 const { StyleInfo } = lazyImport(() => import('@/features/style_info'), 'StyleInfo');
 
+const { ProductionProcess } = lazyImport(() => import('@/features/production_process'), 'ProductionProcess');
+
 
 
 export const protectedRoutes = [
   { path: '/', element: <DashBoard /> },
   { path: '/info', element: <StyleInfo /> },
+  { path: '/process', element: <ProductionProcess /> },
 ];

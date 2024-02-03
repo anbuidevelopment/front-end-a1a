@@ -4,6 +4,7 @@ import { InputField } from '@/components/Form';
 import { FormStyleDataInfo } from '@/features/style_info';
 import { MuiDialog } from '@/components/Elements';
 import AutoCompleteLimitTags from '@/features/style_info/components/AutoComplete/AutoCompleteMultiChoose';
+import { splitItem, splitItemJoin } from '@/utils/format';
 
 function SubForm({ formData, onChange }: FormStyleDataInfo) {
 
@@ -55,8 +56,8 @@ function SubForm({ formData, onChange }: FormStyleDataInfo) {
                 id={item.nameData}
                 name={item.nameData}
                 label={item.label}
-                value={item.multi ? item.value?.toString().split('|').join('\n'):item.value}
-                rows={item.multi ? item.value?.toString().split('|').length:1}
+                value={item.multi ? splitItemJoin(item.value?.toString()):item.value}
+                rows={item.multi ? splitItem(item.value?.toString()).length:1}
                 onChange={item.onChange}
                 onDoubleClick={item.multi ?  e=>setOpen(true) : e=>{}}
                 multiline={item.multi}

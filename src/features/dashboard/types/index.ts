@@ -34,7 +34,9 @@ export type TableInfo = {
 export interface CustomToolbarStatus {
   deleteStatus: boolean,
   idDelete: any,
-  handleSetParamsSearch: (searchValue: GetFilterInfo) => void
+  handleSetParamsSearch: (searchValue: GetFilterInfo) => void,
+  handleSetParamsStyleDetail: (id:number)=>void,
+  styleDetailDto: StyleDetailInfo,
 }
 
 export interface GetFilterInfo {
@@ -50,7 +52,6 @@ export type FilterInfo = {
 
 export interface GridDataInfo {
   rows: GridRowsProp,
-  columns: GridColDef[],
   totalElements: number
 }
 
@@ -80,6 +81,7 @@ export interface GridDataGetOverViewInfo {
   handleSetParamsSearch: (searchValue: GetFilterInfo) => void
   handleSetParamsStyleDetail:(id:number)=>void
   styleDetailDto:StyleDetailInfo|null
+  dashBoardDto:TableInfo|null
 }
 
 export interface StyleDetailContent {

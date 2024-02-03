@@ -28,33 +28,70 @@
 //     </>
 //   );
 // };
-import {Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Button} from '@mui/material'
-import { CloseSharp, DoneSharp } from '@mui/icons-material';
+import {
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
+  Button,
+} from '@mui/material';
+import { CloseSharp } from '@mui/icons-material';
+import { useState } from 'react';
 
 interface DialogProps {
-  open: boolean
-  setOpen: (open: boolean) => void
-  title?: string
-  content?: any
-  fullscreen?: boolean
-  percentScreen?:string
-  buttonAccept?:boolean
+  open: boolean;
+  setOpen: (open: boolean) => void;
+  title?: string;
+  content?: any;
+  percentScreenW?: string;
+  percentScreenH?: string;
+  buttonAccept?: boolean;
+  buttonName?: string;
+  buttonColor?: string;
+  buttonColorBackground?: string;
+  buttonStartIcon?: React.ReactNode;
+  handleClickAccept?: () => void;
 }
 
-export function MuiDialog({open, setOpen, title, content, fullscreen,percentScreen,buttonAccept}: DialogProps) {
+export function MuiDialog({
+                            open,
+                            setOpen,
+                            title,
+                            content,
+                            percentScreenW,
+                            percentScreenH,
+                            buttonAccept,
+                            buttonName,
+                            handleClickAccept,
+                            buttonColor,
+                            buttonStartIcon,
+                            buttonColorBackground,
+                          }: DialogProps) {
+
+  const [isAccepting, setIsAccepting] = useState(false);
+
+  const handleAcceptClick = () => {
+    setIsAccepting(true);
+
+    setTimeout(() => {
+      setOpen(false);
+
+      setIsAccepting(false);
+    }, 2000);
+
+    if (handleClickAccept) {
+      handleClickAccept();
+    }
+  };
 
 
   return (
-    <Dialog sx={{
-      width: percentScreen,
-      height: percentScreen,
-      position: 'absolute',
-      top: '50%',
-      left: '50%',
-      transform: 'translate(-50%,-50%)'
-    }}
-            fullScreen open={open} onClose={() => setOpen(false)} aria-labelledby='dialog-title'
-            aria-describedby='dialog-description'>
+    <Dialog
+      sx={{ '& .MuiDialog-paper': { width: percentScreenW, height: percentScreenH } }}
+      fullScreen
+      open={open} onClose={()=>setOpen(false)} aria-labelledby='dialog-title'
+      aria-describedby='dialog-description'>
       <DialogTitle id='dialog-title'>{title}</DialogTitle>
       <DialogContent>
         <DialogContentText id='dialog-description'>
@@ -62,10 +99,16 @@ export function MuiDialog({open, setOpen, title, content, fullscreen,percentScre
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        {buttonAccept ? <Button  sx={{ backgroundColor: '#FDCF76', color: 'black' }} startIcon={<DoneSharp />} variant={'contained'} onClick={() => setOpen(false)}>Accept</Button> : null}
-        <Button startIcon={<CloseSharp />} variant={'outlined'} onClick={() => setOpen(false)}>Cancel</Button>
+        <Button sx={{ color: '#F25E7A',backgroundColor:'#FFFFFF' }}
+                startIcon={<CloseSharp />}
+                variant={'outlined'}
+                onClick={() => setOpen(false)}>Cancel</Button>
+        {buttonAccept ? <Button
+          sx={{ backgroundColor: buttonColorBackground, color: buttonColor }}
+          startIcon={buttonStartIcon} variant={'contained'}
+          onClick={handleAcceptClick}>{buttonName}</Button> : null}
       </DialogActions>
     </Dialog>
-  )
+  );
 }
 

@@ -1,5 +1,6 @@
 import { axios } from '@/lib/axios';
 import { StyleMasterConfigData, UpdateResponse } from '@/features/style_info';
+import { ResponseAPI } from '@/utils/responseType';
 
 export interface UpdateRequestDto {
   pAction: number,
@@ -7,7 +8,7 @@ export interface UpdateRequestDto {
   pOutput: number
 }
 
-export const executeUpdateStyleMasterCode = (params: UpdateRequestDto, request: StyleMasterConfigData[]):Promise<UpdateResponse> => {
+export const executeUpdateStyleMasterCode = (params: UpdateRequestDto, request: StyleMasterConfigData[]):Promise<ResponseAPI<UpdateResponse>> => {
   return axios.post('/style-master/config-data', request, { params: params });
 };
 

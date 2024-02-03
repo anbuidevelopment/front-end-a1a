@@ -11,21 +11,22 @@ import { loadDashBoard } from '@/features/dashboard/api/dashboard';
 import dayjs from 'dayjs';
 import { loadSearchDashBoard } from '@/features/dashboard/api/searchoverview';
 import { useUser } from '@/lib/auth';
+import { Button, ButtonGroup, IconButton } from '@mui/material';
+import { AddSharp, EditSharp } from '@mui/icons-material';
+import { customStyles } from '@/utils/format';
 
 export const useOverView = () => {
 
-  const user=useUser()
-  let customerCode=user?.data?.customerCode === undefined ? 'AD' : user.data.customerCode
+  const user = useUser();
+  let customerCode = user?.data?.customerCode === undefined ? 'AD' : user.data.customerCode;
   const [searchStatus, setSearchStatus] = useState<boolean>(false);
 
   const [dashBoardDto, setDashBoardDto] = useState<TableInfo | null>(null);
 
   const [gridDataInfo, setGridDataInfo] = useState<GridDataInfo>({
     rows: [],
-    columns: [],
     totalElements: 0,
   });
-
 
   const [paramsGetOverView, setParamsGetOverView] = useState<GetOverViewInfo>({
     pStyleMasterCode: '',
@@ -115,7 +116,7 @@ export const useOverView = () => {
           pMerAccountName: '',
         }));
     }
-    setSearchStatus(true)
+    setSearchStatus(true);
   }, [paramsGetOverView]);
 
   const handleChangePaginationModel = useCallback((model: GridPaginationModel) => {
@@ -129,50 +130,30 @@ export const useOverView = () => {
   useEffect(() => {
     const getData = async () => {
       try {
-        const result = searchStatus ? await loadSearchDashBoard(paramsGetOverView): await loadDashBoard(paramsGetOverView);
-        setDashBoardDto(result);
+        const result = searchStatus ? await loadSearchDashBoard(paramsGetOverView) : await loadDashBoard(paramsGetOverView);
+        if(result.message===null){
+        setDashBoardDto(result.data);
         setGridDataInfo((prevState) => ({
           ...prevState,
-          rows: result?.content.dataList,
-          totalElements: result?.content.totalElements,
-        }));
+          rows: result?.data?.content.dataList,
+          totalElements: result?.data?.content.totalElements,
+        }))}
+       else {
+         setDashBoardDto(null)
+         setGridDataInfo({
+           rows:[],totalElements:0
+         })
+       }
+
       } catch (error) {
         console.error(error);
       }
     };
     getData();
-  }, [paramsGetOverView,searchStatus]);
-
-  useEffect(() => {
-    const columnsHeader: GridColDef[] = (dashBoardDto?.headers || []).map((header) => ({
-      field: header,
-      headerName: convertToTitleCase(header),
-      width:
-        header === 'styleMasterId' || header === 'season' || header === 'stage' || header === 'optionNo'
-          ? 130
-          : header === 'tacRouteNumber' || header === 'a1aRouteNumber' || header==='factoryAllocation'
-            ? 160
-            : 220,
-
-      headerClassName: 'col-header',
-      renderCell: (params) => (
-        <>
-          {params.colDef.field === 'createdDate'
-            ? new Date(params.value).toISOString().replace('T', ' ').substring(0, 19)
-            : params.value}
-        </>
-      ),
-      hideable: header === 'id' || header === 'status' || header === 'totalRowNum' || header === 'styleMasterId',
-    }));
-
-    // setColumns(columnsHeader);
-    setGridDataInfo((prevState) => ({
-      ...prevState,
-      columns: columnsHeader,
-    }));
-  }, [dashBoardDto]);
+  }, [paramsGetOverView, searchStatus]);
 
   return {
+    dashBoardDto,
     gridDataInfo,
     paramsGetOverView,
     handleChangePaginationModel,

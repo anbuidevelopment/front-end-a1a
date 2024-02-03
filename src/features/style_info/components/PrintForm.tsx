@@ -2,6 +2,7 @@ import { Card, CardContent, Grid } from '@mui/material';
 import { InputField } from '@/components/Form';
 import { useStyleInfo } from '@/hooks/useStyleInfo';
 import { FormStyleDataInfo } from '@/features/style_info';
+import { splitItem, splitItemJoin } from '@/utils/format';
 
 function PrintForm({formData,onChange}:FormStyleDataInfo) {
 
@@ -48,8 +49,8 @@ function PrintForm({formData,onChange}:FormStyleDataInfo) {
                 id={item.nameData}
                 name={item.nameData}
                 multiline={item.multi}
-                value={item.multi ? item.value?.toString().split('|').join('\n'):item.value}
-                rows={item.multi ? item.value?.toString().split('|').length:1}
+                value={item.multi ? splitItemJoin(item.value?.toString()):item.value}
+                rows={item.multi ? splitItem(item.value?.toString()).length:1}
                 label={item.label}
                 />
             </Grid>

@@ -1,11 +1,10 @@
 import { useState } from 'react';
-import { GridDataGetOverViewInfo, StyleDetailInfo } from '../types';
-import { DataGrid, GridRowModel, GridRowSelectionModel } from '@mui/x-data-grid';
-import { Button, CircularProgress, Paper } from '@mui/material';
+import { convertToTitleCase, GridDataGetOverViewInfo } from '../types';
+import { DataGrid, GridColDef, GRID_CHECKBOX_SELECTION_COL_DEF} from '@mui/x-data-grid';
+import { CircularProgress, Paper } from '@mui/material';
 import { CustomToolbar } from '@/features/dashboard/components/CustomToolbar';
 import { MuiDialog } from '@/components/Elements';
 import { StyleInfoForm } from '@/features/style_info/components/StyleInfoForm';
-import { useStyleDetail } from '@/hooks/useStyleDetail';
 
 export const DashboardFilter = ({
                                   paramsGrid,
@@ -14,20 +13,63 @@ export const DashboardFilter = ({
                                   handleSetParamsSearch,
                                   handleSetParamsStyleDetail,
                                   styleDetailDto,
+                                  dashBoardDto,
                                 }: GridDataGetOverViewInfo) => {
   //const {styleDetailDto}=useStyleDetail()
   const [selectedIds, setSelectedIds] = useState<any>([]);
   const [deleteStatus, setDeleteStatus] = useState<boolean>(true);
   const [isDialog, setIsDialog] = useState<boolean>(false);
 
-  function handleClick() {
-    console.log(gridDataInfo.rows);
+  function handleClickEdit(row: any) {
+    handleSetParamsStyleDetail(row.row.styleMasterId);
+    setIsDialog(true);
   }
 
-  const handleDoubleClick = (rowSelectionModel: GridRowModel) => {
-    handleSetParamsStyleDetail(rowSelectionModel.row.styleMasterId);
+  function handleClickAdd(row: any) {
+    handleSetParamsStyleDetail(row.row.styleMasterId);
     setIsDialog(true);
-  };
+  }
+
+  function handleClickDelete(row: any) {
+    handleSetParamsStyleDetail(row.row.styleMasterId);
+    // setIsDialog(true);
+  }
+
+  const columnsHeader: GridColDef[] = [
+    ...(dashBoardDto?.headers || [
+      'styleMasterCode',
+      'season',
+      'stage',
+      'optionNo',
+      'tacRouteNumber',
+      'a1aRouteNumber',
+      'productType',
+      'factoryAllocation',
+      'merAccountName',
+      'createdDate']).map((header) => ({
+      field: header,
+      headerName: convertToTitleCase(header),
+      width:
+        header === 'styleMasterId' || header === 'season' || header === 'stage' || header === 'optionNo'
+          ? 130
+          : header === 'tacRouteNumber' || header === 'a1aRouteNumber' || header === 'factoryAllocation'
+            ? 160
+            : 220,
+      headerClassName: 'col-header',
+      renderCell: (params: any) => (
+        <>
+          {params.colDef.field === 'createdDate'
+            ? new Date(params.value).toISOString().replace('T', ' ').substring(0, 19)
+            : params.value}
+        </>
+      ),
+      hideable: header === 'id' || header === 'status' || header === 'totalRowNum' || header === 'styleMasterId',
+    })),
+  ];
+
+  columnsHeader.slice(0,5).forEach((column)=>{
+    column.pinnable=true
+  })
 
   return (
     <Paper
@@ -37,37 +79,35 @@ export const DashboardFilter = ({
         width: '100%',
         minHeight: 100,
         marginTop: 4,
+        display: 'grid',
         '& .MuiDataGrid-columnHeaderTitle': {
-          fontWeight: 'bold',
+          fontWeight: 'normal',
         },
         '& .col-header': {
-          backgroundColor: '#0487D9',
+          backgroundColor: '#CF9FFF',
           color: 'white',
         },
-        '&.MuiDataGrid-columnHeader': {
-          backgroundColor: '#0487D9',
-          color: 'white',
-        },
-        '& .MuiCheckbox-root.Mui-checked.MuiCheckbox-indeterminate': {
+        '& .MuiDataGrid-columnHeader': {
+          backgroundColor: '#CF9FFF',
           color: 'white',
         },
         '& .MuiCheckbox-root': {
-          color: '#0487D9',
-        },
-        '& .MuiDataGrid-checkboxInput': {
-          color: '#0487D9',
+          color: '#8E54E9',
+          '&.Mui-checked': {
+            color: '#8E54E9',
+          },
         },
       }}
     >
-      {gridDataInfo.rows.length > 0 ? (
+      {/*{gridDataInfo.rows.length > 0 ? (*/}
         <DataGrid
           sx={{
-            fontWeight:'bold'
+            fontWeight: 'normal',
           }}
           initialState={{
             columns: {
               columnVisibilityModel: {
-                orderNo: false,
+                orderNo: true,
               },
             },
           }}
@@ -77,7 +117,7 @@ export const DashboardFilter = ({
           paginationMode={'server'}
           paginationModel={{ page: paramsGrid.pPageIndex, pageSize: paramsGrid.pPageSize }}
           onPaginationModelChange={paginationModelOnChange}
-          columns={gridDataInfo.columns.filter((column) => !column.hideable)}
+          columns={columnsHeader.filter((column) => !column.hideable)}
           rowCount={gridDataInfo.totalElements || 0}
           rows={gridDataInfo.rows}
           slots={{ toolbar: CustomToolbar }}
@@ -86,10 +126,11 @@ export const DashboardFilter = ({
               deleteStatus: deleteStatus,
               idDelete: selectedIds,
               handleSetParamsSearch: handleSetParamsSearch,
+              handleSetParamsStyleDetail: handleSetParamsStyleDetail,
+              styleDetailDto: styleDetailDto,
             },
           }}
           checkboxSelection
-          disableRowSelectionOnClick
           onRowSelectionModelChange={(rowSelectionModel) => {
             const selectedRows = rowSelectionModel.map((rowId) => {
               return gridDataInfo.rows.find((row) => row.id === rowId);
@@ -97,15 +138,15 @@ export const DashboardFilter = ({
             setSelectedIds(selectedRows);
             rowSelectionModel.length > 0 ? setDeleteStatus(false) : setDeleteStatus(true);
           }}
-          onRowDoubleClick={(rowSelectionModel: GridRowModel) => handleDoubleClick(rowSelectionModel)}
         />
-      ) : (
-        <div className={'w-full h-48 flex justify-center items-center'}>
-          <CircularProgress style={{}} />
-        </div>
-      )}
-      <MuiDialog percentScreen={'75%'} open={isDialog} setOpen={setIsDialog} title={'Style Master Description'}
-                 content={<StyleInfoForm styleDetailDto={styleDetailDto} />} />
+      {/*) : (*/}
+      {/*  <div className={'w-full h-48 flex justify-center items-center'}>*/}
+      {/*    <CircularProgress style={{}} />*/}
+      {/*  </div>*/}
+      {/*)}*/}
+      <MuiDialog percentScreenW={'75%'} percentScreenH={'75%'} open={isDialog} setOpen={setIsDialog} title={'Style Master Description'}
+
+                 content={<StyleInfoForm styleDetailDto={styleDetailDto} action={1}/>} />
     </Paper>
   );
 };

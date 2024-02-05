@@ -9,7 +9,7 @@ type HeadProps = {
 
 export const Head = ({ title = '', description = '' }: HeadProps = {}) => {
   return (
-    <Helmet title={title ? `${title} | A1A` : undefined} defaultTitle={'A1A System'}>
+    <Helmet title={title ? `T-DEV | ${title}` : undefined} defaultTitle={'A1A System'}>
       <meta name={'description'} content={description}></meta>
       <link rel="icon" href={process.env.PUBLIC_URL+ '/favicon.ico'} />
     </Helmet>

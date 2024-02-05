@@ -45,7 +45,6 @@ function App() {
                   backgroundColor: '#E0B0FF',
                   color: '#FFFFFF',
                 },
-
               },
             },
           },
@@ -99,7 +98,8 @@ function App() {
                 backgroundColor:'#FCEEFC',
                 '&.Mui-selected': {
                   color: '#FFFFFF',
-                  backgroundColor:'#8E54E9'
+                  backgroundColor:'#8E54E9',
+                  borderRadius:'10px'
                 },
               },
             },
@@ -127,6 +127,13 @@ function App() {
               }
             }
           },
+          MuiTooltip:{
+            styleOverrides:{
+              tooltip:{
+                backgroundColor:'#FCEEFC'
+              }
+            }
+          }
         },
       }),
     [mode],
@@ -158,27 +165,27 @@ function App() {
     [theme.breakpoints.up('xs')]: {
       fontSize: '1.25rem',
       fontWeight: 500,
-      borderRadius:'50px',
+      borderRadius:'25px',
     },
     [theme.breakpoints.up('sm')]: {
       fontSize: '1.25rem',
       fontWeight: 500,
-      borderRadius:'50px',
+      borderRadius:'25px',
     },
     [theme.breakpoints.up('md')]: {
       fontSize: '0.75rem',
       fontWeight: 500,
-      borderRadius:'50px',
+      borderRadius:'25px',
     },
     [theme.breakpoints.up('lg')]: {
       fontSize: '1rem',
       fontWeight: 500,
-      borderRadius:'50px',
+      borderRadius:'25px',
     },
     [theme.breakpoints.up('xl')]: {
       fontSize: '1.125rem',
       fontWeight: 500,
-      borderRadius:'50px',
+      borderRadius:'25px',
     },
   };
   theme.typography.h3 = { ...sharedTypography };

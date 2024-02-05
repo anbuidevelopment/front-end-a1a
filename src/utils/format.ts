@@ -4,6 +4,14 @@ export const formatDate = (date: number) => dayjs(date).format('dd/MM/yyyy HH:mm
 
 export const splitItem = (item: string) => item.split(/\||\n/);
 export const splitItemJoin = (item: string) => item.split('|').join('\n');
+export  function extractLastName(fullName: string): string | null {
+  const names = fullName.split(' ');
+  if (names.length > 0) {
+    return names[names.length - 1];
+  }
+  return null;
+}
+
 
 export const customStyles: Record<string, React.CSSProperties> = {
   color1: { background: 'linear-gradient(132deg,#4776E6 0%, #8E54E9 100%)' },

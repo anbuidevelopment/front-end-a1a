@@ -16,6 +16,7 @@ import { useLogout, useUser } from '@/lib/auth';
 import { useContext, useState } from 'react';
 import { ColorModeContext } from '@/App';
 import { DarkModeSharp, LightModeSharp, LogoutSharp, VerifiedUserSharp } from '@mui/icons-material';
+import { customStyles } from '@/utils/format';
 
 
 export const UserBoxCard = () => {
@@ -29,14 +30,14 @@ export const UserBoxCard = () => {
   const items = [
     {
       text: 'User Info',
-      icon: <VerifiedUserSharp sx={{ color: '#0487D9' }} />,
+      icon: <VerifiedUserSharp sx={{ color: customStyles['colorIcon'] }} />,
       to: '/user',
       onClick: () => {
       },
     },
     {
       text: 'Log out',
-      icon: <LogoutSharp sx={{ color: '#0487D9' }} />,
+      icon: <LogoutSharp sx={{ color: customStyles['colorIcon'] }} />,
       to: '',
       onClick: () => {
         logout.mutate({});
@@ -66,8 +67,8 @@ export const UserBoxCard = () => {
           }} onClick={() => {
             colorMode.toggleColorMode();
           }}>
-            {theme.palette.mode === 'dark' ? <LightModeSharp sx={{ color: '#8E54E9' }} /> :
-              <DarkModeSharp sx={{ color: '#8E54E9' }} />}
+            {theme.palette.mode === 'dark' ? <LightModeSharp sx={{ color: customStyles['colorIcon'] }} /> :
+              <DarkModeSharp sx={{ color: customStyles['colorIcon'] }} />}
           </IconButton>
         </ButtonGroup>
       </Box>

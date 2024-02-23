@@ -3,7 +3,8 @@ import { AppProvider } from '@/provider/app';
 import { AppRoutes } from '@/routes';
 import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
 import { SnackbarProvider } from 'notistack';
-
+import {} from '@mui/x-data-grid/themeAugmentation';
+import { customColorDefault } from '@/utils/format';
 
 export const ColorModeContext = createContext({
   toggleColorMode: () => {
@@ -27,14 +28,14 @@ function App() {
       createTheme({
         palette: {
           primary: {
-            main: mode==='dark' ? '#444444' : '#FCEEFC',
+            main: mode === 'dark' ? customColorDefault.ColorMainPrimaryDark.color : customColorDefault.ColorMainPrimary.color,
           },
           text: {
-            primary: mode === 'dark' ? '#FFFFFF' : '#2F3659'
+            primary: mode === 'dark' ? customColorDefault.ColorTextPrimaryDark.color : customColorDefault.ColorTextPrimary.color,
           },
-          background:{
-            default: mode==='dark' ? '#444444' : '#FCEEFC',
-            paper: mode==='dark' ? '#333333' : '#FCEFFC',
+          background: {
+            default: mode === 'dark' ? customColorDefault.ColorBackgroundDark.default : customColorDefault.ColorBackground.default,
+            paper: mode === 'dark' ? customColorDefault.ColorBackgroundDark.paper : customColorDefault.ColorBackground.paper,
           },
         },
         components: {
@@ -42,8 +43,8 @@ function App() {
             styleOverrides: {
               root: {
                 '&:hover': {
-                  backgroundColor: '#E0B0FF',
-                  color: '#FFFFFF',
+                  backgroundColor: customColorDefault.ColorMuiButtonHover.backgroundColor,
+                  color: customColorDefault.ColorMuiButtonHover.color,
                 },
               },
             },
@@ -53,23 +54,23 @@ function App() {
               root: {
                 borderRadius: '8px',
                 '& .MuiOutlinedInput-notchedOutline': {
-                  borderColor: mode === 'dark' ? '#FFFFFF' : '#D5CACE',
+                  borderColor: mode === 'dark' ? customColorDefault.ColorMuiOutlinedInputDark.borderColor : customColorDefault.ColorMuiOutlinedInput.borderColor,
                 },
                 '&:hover': {
                   '& .MuiOutlinedInput-notchedOutline': {
-                    borderColor: mode === 'dark' ? '#FFFFFF' : '#D5CACE',
+                    borderColor: mode === 'dark' ? customColorDefault.ColorMuiOutlinedInputDark.borderColor : customColorDefault.ColorMuiOutlinedInput.borderColor,
                   },
                 },
                 '&.Mui-disabled': {
                   '& .MuiOutlinedInput-notchedOutline': {
-                    borderColor: mode === 'dark' ? '#FFFFFF' : '#D5CACE',
+                    borderColor: mode === 'dark' ? customColorDefault.ColorMuiOutlinedInputDark.borderColor : customColorDefault.ColorMuiOutlinedInput.borderColor,
                   },
                 },
-                '&.Mui-focused':{
+                '&.Mui-focused': {
                   '& .MuiOutlinedInput-notchedOutline': {
-                    borderColor: mode === 'dark' ? '#FFFFFF' : '#D5CACE',
+                    borderColor: mode === 'dark' ? customColorDefault.ColorMuiOutlinedInputDark.borderColor : customColorDefault.ColorMuiOutlinedInput.borderColor,
                   },
-                }
+                },
               },
             },
           },
@@ -78,14 +79,14 @@ function App() {
               root: {
                 borderRadius: '8px',
                 fontWeight: 'normal',
-                color: mode === 'dark' ? '#FFFFFF' : '#444444',
+                color: mode === 'dark' ? customColorDefault.ColorMuiInputBaseDark.color : customColorDefault.ColorMuiInputBase.color,
                 '&.Mui-disabled': {
                   fontWeight: 500,
-                  color: mode === 'dark' ? '#FFFFFF' : '#444444',
+                  color: mode === 'dark' ? customColorDefault.ColorMuiInputBaseDark.color : customColorDefault.ColorMuiInputBase.color,
                 },
                 '&.Mui-focused': {
                   fontWeight: 500,
-                  color: mode === 'dark' ? '#FFFFFF' : '#444444',
+                  color: mode === 'dark' ? customColorDefault.ColorMuiInputBaseDark.color : customColorDefault.ColorMuiInputBase.color,
                 },
               },
             },
@@ -94,12 +95,12 @@ function App() {
             styleOverrides: {
               root: {
                 fontWeight: 'normal',
-                color: '#555555',
-                backgroundColor:'#FCEEFC',
+                color: 'customColorDefault.ColorMuiTab.color',
+                backgroundColor: customColorDefault.ColorMuiTab.backgroundColor,
                 '&.Mui-selected': {
-                  color: '#FFFFFF',
-                  backgroundColor:'#8E54E9',
-                  borderRadius:'10px'
+                  color: customColorDefault.ColorMuiTabSelected.color,
+                  backgroundColor: customColorDefault.ColorMuiTabSelected.backgroundColor,
+                  borderRadius: '10px',
                 },
               },
             },
@@ -108,29 +109,57 @@ function App() {
             styleOverrides: {
               root: {
                 fontWeight: 500,
-                color: mode === 'dark' ? '#FFFFFF' : '#5A56BF',
+                color: mode === 'dark' ? customColorDefault.ColorMuiFormLabelDark.color : customColorDefault.ColorMuiFormLabel.color,
                 '&.Mui-disabled': {
                   fontWeight: 500,
-                  color: mode === 'dark' ? '#FFFFFF' : '#5A56BF',
+                  color: mode === 'dark' ? customColorDefault.ColorMuiFormLabelDarkDisabled.color : customColorDefault.ColorMuiFormLabelDisabled.color,
                 },
                 '&.Mui-focused': {
                   fontWeight: 500,
-                  color: mode === 'dark' ? '#FFFFFF' : '#B985D7',
+                  color: mode === 'dark' ? customColorDefault.ColorMuiFormLabelDarkFocused.color : customColorDefault.ColorMuiFormLabelFocused.color,
                 },
               },
             },
           },
-          MuiTypography:{
+          MuiTypography: {
+            styleOverrides: {
+              root: {
+                color: mode === 'dark' ? customColorDefault.ColorMuiTypographyDark.color : customColorDefault.ColorMuiTypography.color,
+              },
+            },
+          },
+          MuiTooltip: {
+            styleOverrides: {
+              tooltip: {
+                backgroundColor: customColorDefault.ColorMuiTooltip.backgroundColor,
+              },
+            },
+          },
+          MuiDataGrid: {
+            styleOverrides: {
+              row: {
+                '&.Mui-selected': {
+                  backgroundColor: customColorDefault.ColorDataGridSelected.backgroundColor,
+                  color: customColorDefault.ColorDataGridSelected.color,
+                  '&:hover': {
+                    backgroundColor: customColorDefault.ColorDataGridHover.backgroundColor,
+                    color: customColorDefault.ColorDataGridHover.color,
+                  },
+                },
+                '&:hover': {
+                  backgroundColor: customColorDefault.ColorDataGridHover.backgroundColor,
+                  color: customColorDefault.ColorDataGridHover.color,
+                },
+              },
+            },
+          },
+          MuiToolbar:{
             styleOverrides:{
               root:{
-                color:mode === 'dark' ? '#FFFFFF' : '#2F3659'
-              }
-            }
-          },
-          MuiTooltip:{
-            styleOverrides:{
-              tooltip:{
-                backgroundColor:'#FCEEFC'
+                minHeight:'50px',
+                '& .MuiToolbar-gutters': {
+                  padding: 0,
+                }
               }
             }
           }
@@ -140,7 +169,7 @@ function App() {
   );
   const sharedTypography = {
     fontSize: '1rem',
-    color:mode === 'dark' ? '#FFFFFF' : '#2F3659',
+    color: mode === 'dark' ? '#FFFFFF' : '#2F3659',
     [theme.breakpoints.up('xs')]: {
       fontSize: '1rem',
     },
@@ -160,32 +189,33 @@ function App() {
   const sharedButton = {
     fontSize: '0.75rem',
     fontWeight: 300,
-    backgroundColor:'#8E54E9',
-    textColor:'#FFFFFF',
+    disableRipple: true,
+    backgroundColor: customColorDefault.ColorMuiButton.backgroundColor,
+    textColor: customColorDefault.ColorMuiButton.textColor,
     [theme.breakpoints.up('xs')]: {
-      fontSize: '1.25rem',
+      fontSize: '1rem',
       fontWeight: 500,
-      borderRadius:'25px',
+      borderRadius: '25px',
     },
     [theme.breakpoints.up('sm')]: {
-      fontSize: '1.25rem',
+      fontSize: '1rem',
       fontWeight: 500,
-      borderRadius:'25px',
+      borderRadius: '25px',
     },
     [theme.breakpoints.up('md')]: {
       fontSize: '0.75rem',
       fontWeight: 500,
-      borderRadius:'25px',
+      borderRadius: '25px',
     },
     [theme.breakpoints.up('lg')]: {
       fontSize: '1rem',
       fontWeight: 500,
-      borderRadius:'25px',
+      borderRadius: '25px',
     },
     [theme.breakpoints.up('xl')]: {
-      fontSize: '1.125rem',
+      fontSize: '1rem',
       fontWeight: 500,
-      borderRadius:'25px',
+      borderRadius: '25px',
     },
   };
   theme.typography.h3 = { ...sharedTypography };

@@ -1,4 +1,4 @@
-import { Box, Button, ButtonGroup, Grid, Tab } from '@mui/material';
+import { Box, Button, Grid, Tab } from '@mui/material';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
 import { useEffect, useState } from 'react';
 import { useSnackbar } from 'notistack';
@@ -18,7 +18,6 @@ import {
 import { UpdateRequestDto } from '@/features/style_info/api/update';
 import { useUser } from '@/lib/auth';
 import { UpdateSharp } from '@mui/icons-material';
-import { customStyles } from '@/utils/format';
 
 
 export const StyleInfoForm = ({ styleDetailDto, action }: FormStyleDetailDto) => {
@@ -112,6 +111,44 @@ export const StyleInfoForm = ({ styleDetailDto, action }: FormStyleDetailDto) =>
     });
   };
 
+  const tabItems=[
+    {
+      label:'SAM',
+      value:'1',
+      content: <SamForm formData={styleInfoDataInputText} onChange={handleChangeInputText} />
+    },
+    {
+      label:'Printing',
+      value:'2',
+      content: <PrintForm formData={styleInfoDataInputText} onChange={handleChangeInputText} />
+    },
+    {
+      label:'Embroidery',
+      value:'3',
+      content: <EmbForm formData={styleInfoDataInputText} onChange={handleChangeInputText} />
+    },
+    {
+      label:'Heat Transfer',
+      value:'4',
+      content: <HeatForm formData={styleInfoDataInputText} onChange={handleChangeInputText} />
+    },
+    {
+      label:'Bonding',
+      value:'5',
+      content: <BondForm formData={styleInfoDataInputText} onChange={handleChangeInputText} />
+    },
+    {
+      label:'Pad Print',
+      value:'6',
+      content: <PadPrintForm formData={styleInfoDataInputText} onChange={handleChangeInputText} />
+    },
+    {
+      label:'Sub',
+      value:'7',
+      content: <SubForm formData={styleInfoDataInputText} onChange={handleChangeInputText} />
+    },
+  ]
+
   return (
     <Grid container
           sx={{height:'100%'}}
@@ -119,7 +156,6 @@ export const StyleInfoForm = ({ styleDetailDto, action }: FormStyleDetailDto) =>
           alignItems={'stretch'}
           direction={'row'}
           spacing={2}>
-
       <Grid item xs={12} md={12}>
         <StyleForm formData={styleInfoDataAutoComplete} onChange={handleChangeAutoComplete} action={action} />
       </Grid>
@@ -128,36 +164,16 @@ export const StyleInfoForm = ({ styleDetailDto, action }: FormStyleDetailDto) =>
           <TabContext value={value}>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
               <TabList onChange={handleChange} aria-label='Tab MasterItem'>
-                <Tab label='SAM' value='1' />
-                <Tab label='Printing' value='2' />
-                <Tab label='Embroidery' value='3' />
-                <Tab label='Heat Transfer' value='4' />
-                <Tab label='Bonding' value='5' />
-                <Tab label='Pad print' value='6' />
-                <Tab label='Sub' value='7' />
+                {tabItems.map((item)=>(
+                  <Tab label={item.label} value={item.value} />
+                ))}
               </TabList>
             </Box>
-            <TabPanel value='1'>
-              <SamForm formData={styleInfoDataInputText} onChange={handleChangeInputText} />
-            </TabPanel>
-            <TabPanel value='2'>
-              <PrintForm formData={styleInfoDataInputText} onChange={handleChangeInputText} />
-            </TabPanel>
-            <TabPanel value='3'>
-              <EmbForm formData={styleInfoDataInputText} onChange={handleChangeInputText} />
-            </TabPanel>
-            <TabPanel value='4'>
-              <HeatForm formData={styleInfoDataInputText} onChange={handleChangeInputText} />
-            </TabPanel>
-            <TabPanel value='5'>
-              <BondForm formData={styleInfoDataInputText} onChange={handleChangeInputText} />
-            </TabPanel>
-            <TabPanel value='6'>
-              <PadPrintForm formData={styleInfoDataInputText} onChange={handleChangeInputText} />
-            </TabPanel>
-            <TabPanel value='7'>
-              <SubForm formData={styleInfoDataInputText} onChange={handleChangeInputText} />
-            </TabPanel>
+            {tabItems.map((item)=>(
+              <TabPanel value={item.value}>
+                {item.content}
+              </TabPanel>
+            ))}
           </TabContext>
         </Box>
       </Grid>

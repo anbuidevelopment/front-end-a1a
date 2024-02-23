@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { convertToTitleCase, GridDataGetOverViewInfo } from '../types';
-import { DataGrid, GridColDef, GRID_CHECKBOX_SELECTION_COL_DEF} from '@mui/x-data-grid';
-import { CircularProgress, Paper } from '@mui/material';
+import { DataGrid, GridColDef} from '@mui/x-data-grid';
+import { Paper } from '@mui/material';
 import { CustomToolbar } from '@/features/dashboard/components/CustomToolbar';
 import { MuiDialog } from '@/components/Elements';
 import { StyleInfoForm } from '@/features/style_info/components/StyleInfoForm';
+import { customStyles } from '@/utils/format';
 
 export const DashboardFilter = ({
                                   paramsGrid,
@@ -71,6 +72,7 @@ export const DashboardFilter = ({
     column.pinnable=true
   })
 
+
   return (
     <Paper
       sx={{
@@ -84,26 +86,22 @@ export const DashboardFilter = ({
           fontWeight: 'normal',
         },
         '& .col-header': {
-          backgroundColor: '#CF9FFF',
-          color: 'white',
+          backgroundColor: customStyles['colorTableHeader']
         },
         '& .MuiDataGrid-columnHeader': {
-          backgroundColor: '#CF9FFF',
-          color: 'white',
+          backgroundColor: customStyles['colorTableHeader']
         },
         '& .MuiCheckbox-root': {
-          color: '#8E54E9',
+          color: customStyles['colorIcon'],
           '&.Mui-checked': {
-            color: '#8E54E9',
+            color: customStyles['colorIcon'],
           },
         },
+
       }}
     >
       {/*{gridDataInfo.rows.length > 0 ? (*/}
         <DataGrid
-          sx={{
-            fontWeight: 'normal',
-          }}
           initialState={{
             columns: {
               columnVisibilityModel: {
@@ -111,7 +109,6 @@ export const DashboardFilter = ({
               },
             },
           }}
-          className={'h-[512px]'}
           getRowId={(row) => row.id}
           pageSizeOptions={[10, 25, 50]}
           paginationMode={'server'}
@@ -131,6 +128,7 @@ export const DashboardFilter = ({
             },
           }}
           checkboxSelection
+          disableRowSelectionOnClick
           onRowSelectionModelChange={(rowSelectionModel) => {
             const selectedRows = rowSelectionModel.map((rowId) => {
               return gridDataInfo.rows.find((row) => row.id === rowId);
@@ -144,9 +142,10 @@ export const DashboardFilter = ({
       {/*    <CircularProgress style={{}} />*/}
       {/*  </div>*/}
       {/*)}*/}
-      <MuiDialog percentScreenW={'75%'} percentScreenH={'75%'} open={isDialog} setOpen={setIsDialog} title={'Style Master Description'}
-
+      <MuiDialog percentScreenWidth={'75%'} percentScreenHeight={'75%'} open={isDialog} setOpen={setIsDialog} title={'Style Master Description'}
                  content={<StyleInfoForm styleDetailDto={styleDetailDto} action={1}/>} />
     </Paper>
   );
 };
+
+

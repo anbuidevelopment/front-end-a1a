@@ -5,7 +5,6 @@ import {
   Divider,
   IconButton,
   Toolbar,
-  Typography,
   useTheme,
 } from '@mui/material';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
@@ -15,6 +14,7 @@ import { useDisclosure } from '@/hooks/useDisclosure';
 import { Menu } from '@/components/Elements/NavigationDrawer/Menu';
 import { UserBoxCard } from '@/components/Elements/UserBoxCard/UserBoxCard';
 import { AppBar, Drawer, DrawerHeader } from '@/components/Elements/NavigationDrawer';
+import { customStyles } from '@/utils/format';
 
 type MainLayoutProps = {
   children: React.ReactNode;
@@ -25,14 +25,14 @@ export const MainLayout =({ children }: MainLayoutProps) => {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar position={'fixed'} open={isOpen}>
-        <Toolbar>
+      <AppBar position={'fixed'} open={isOpen} >
+        <Toolbar >
           <IconButton
             color={'inherit'}
             aria-label={'open drawer'}
             edge={'start'}
             sx={{
-              color:'#8E54E9',
+              color: customStyles['colorIcon'],
               ml: 2,
               marginRight: 5,
               ...(isOpen && { display: 'none' }),
@@ -53,7 +53,7 @@ export const MainLayout =({ children }: MainLayoutProps) => {
       <Drawer variant={'permanent'} isOpen={isOpen} onClose={isOpen ? open : close}>
         <DrawerHeader>
           <IconButton onClick={close}>
-            {theme.direction === 'rtl' ? <ChevronRightIcon sx={{color:'#8E54E9'}}/> : <ChevronLeftIcon sx={{color:'#8E54E9'}}/>}
+            {theme.direction === 'rtl' ? <ChevronRightIcon sx={{color:customStyles['colorIcon']}}/> : <ChevronLeftIcon sx={{color:customStyles['colorIcon']}}/>}
           </IconButton>
         </DrawerHeader>
         <Divider />

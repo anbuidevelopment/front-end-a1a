@@ -17,6 +17,7 @@ import {
 import { InputField } from '@/components/Form';
 import { useState } from 'react';
 import { useLogin, useLogout } from '@/lib/auth';
+import { customStyles } from '@/utils/format';
 
 type LoginFormProps = {
   onSuccess: () => void;
@@ -59,7 +60,7 @@ export function LoginForm({ onSuccess }: LoginFormProps) {
       <Card>
         <CardContent sx={{ justifyContent: 'center', alignItems: 'center' }}>
           <Stack spacing={2}>
-            <Typography variant='h3' gutterBottom sx={{color:'#8E54E9'}}>
+            <Typography variant='h3' gutterBottom sx={{ color: customStyles['colorIcon'] }}>
               Login
             </Typography>
 
@@ -70,7 +71,7 @@ export function LoginForm({ onSuccess }: LoginFormProps) {
               value={username}
               onChange={event => setUsername(event.target.value.toUpperCase())}
               type='text'
-              startAdornment={<PersonSharp sx={{ mr: 1, color: '#8E54E9' }} />}
+              startAdornment={<PersonSharp sx={{ mr: 1, color: customStyles['colorIcon'] }} />}
             />
 
             <InputField
@@ -81,18 +82,18 @@ export function LoginForm({ onSuccess }: LoginFormProps) {
               onChange={event => setPassword(event.target.value)}
               type={isShowPass ? 'text' : 'password'}
               onEnterPress={onSubmitLogin}
-              startAdornment={<KeySharp sx={{ mr: 1, color: '#8E54E9' }} />}
+              startAdornment={<KeySharp sx={{ mr: 1, color: customStyles['colorIcon'] }} />}
               endAdornment={
                 <IconButton onClick={onShowPassword} onMouseDown={onMouseDownPass} edge={'end'}>
-                  {isShowPass ? <VisibilityOffSharp sx={{ color: '#8E54E9' }} /> :
-                    <VisibilitySharp sx={{ color: '#8E54E9' }} />}
+                  {isShowPass ? <VisibilityOffSharp sx={{ color: customStyles['colorIcon'] }} /> :
+                    <VisibilitySharp sx={{ color: customStyles['colorIcon'] }} />}
                 </IconButton>
               }
             />
             <Button
               type='submit'
               variant='contained'
-              sx={{backgroundColor:'#8E54E9',color:'#FFFFFF'}}
+              sx={{ backgroundColor: customStyles['colorBackgroundText']}}
               fullWidth
               disabled={login.isPending}
               onClick={onSubmitLogin}

@@ -4,6 +4,7 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import { Box, Grid, Paper, Typography } from '@mui/material';
 import { ListItem } from '@/features/production_process/types';
 import { DroppableList } from './Elements/DroppableList';
+import { customStyles } from '@/utils/format';
 
 const MuiDragDrop: React.FC = () => {
   const [lists, setLists] = useState<ListItem[][]>([
@@ -56,7 +57,7 @@ const MuiDragDrop: React.FC = () => {
             alignItems={'stretch'}>
         {lists.map((list, index) => (
           <Grid item xs={12} md={index === 0 ? 12 : 2.4}>
-            <Typography sx={{ color: '#555555' }} align={'center'} variant={'h3'}>{department[index]}</Typography>
+            <Typography sx={{ color: customStyles['colorIcon'] }} align={'center'} variant={'h3'}>{department[index]}</Typography>
             <DroppableList list={list} index={index} onDrop={handleDrop} />
           </Grid>
         ))}

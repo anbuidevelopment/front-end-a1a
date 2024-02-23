@@ -1,4 +1,4 @@
-import { Box, Button, Grid, MenuItem, useMediaQuery, useTheme } from '@mui/material';
+import { Box, Button, Grid, useMediaQuery, useTheme } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -21,6 +21,7 @@ import { UpdateRequestDto } from '@/features/style_info/api/update';
 import { DeleteForm } from '@/features/dashboard/components/Elements/DeleteForm';
 import { enqueueSnackbar } from 'notistack';
 import { deleteStyleMaster } from '@/features/style_info/api/delete';
+import { customColorDefault, customStyles } from '@/utils/format';
 
 export const CustomToolbar = ({
                                 deleteStatus,
@@ -137,7 +138,7 @@ export const CustomToolbar = ({
     <GridToolbarContainer>
       <Grid container
             justifyContent={'left'}
-            alignItems={'stretch'}
+            alignItems={'flex-end'}
             spacing={0.5}
             direction={'row'}>
         <Grid item xs={12} md={12}>
@@ -151,16 +152,20 @@ export const CustomToolbar = ({
                 <DatePicker
                   sx={{ width: '100%' }}
                   value={pFromDate}
-                  onChange={(newValue) => setPFromDate(newValue)}
+                  onChange={(newValue) => {setPFromDate(newValue);
+                  handleSetParamsSearch({id:1,columnName:'pFromDate',value:newValue===null ? dayjs().subtract(2,'months').format('YYYY-MM-DD') : newValue.format('YYYY-MM-DD')})}}
                   format={'YYYY-MM-DD'}
                   slotProps={{ textField: { size: 'small' } }}
                 />
               </Grid>
               <Grid item xs={12} md={1.8}>
                 <DatePicker
-                  sx={{ width: '100%', color: '#0487D9' }}
+                  sx={{ width: '100%'}}
                   value={pToDate}
-                  onChange={(newValue) => setPToDate(newValue)}
+                  onChange={(newValue) => {
+                    setPToDate(newValue);
+                    handleSetParamsSearch({id:1,columnName:'pToDate',value:newValue===null ? dayjs().format('YYYY-MM-DD') : newValue.format('YYYY-MM-DD')})
+                  }}
                   format={'YYYY-MM-DD'}
                   slotProps={{ textField: { size: 'small' } }}
                 />
@@ -174,50 +179,47 @@ export const CustomToolbar = ({
                                     value={searchValue}
                                     setValue={(newValue) => setSearchValue(newValue)} />
         </Grid>
-        <Grid item xs={12} md={1.1}>
+        <Grid item xs={12} md={1.1} sx={{justifyContent:'flex-end',alignItems:'bottom',height:'100%'}}>
           <Button onClick={handleClickSearch}
                   fullWidth
-                  sx={{ height: '54px' }}
-                  variant={'outlined'}
+                  size={'medium'}
                   startIcon={<SearchSharp />}>Search</Button>
         </Grid>
         <Grid item xs={12} md={1.1}>
           <Button onClick={handleClickRefresh}
-                  fullWidth sx={{ height: '54px' }}
+                  fullWidth
+                  size={'medium'}
                   variant={'outlined'}
                   startIcon={<RefreshSharp />}>Refresh</Button>
         </Grid>
         <Grid item xs={12} md={1.1} sx={{ display: idDelete.length === 1 ? null : 'none' }}>
-          <Button onClick={handleClickUpdate} disabled={deleteStatus} fullWidth
-                  sx={{ height: '54px', display: idDelete.length === 1 ? null : 'none' }}
+          <Button onClick={handleClickUpdate} disabled={deleteStatus} fullWidth size={'medium'}
+                  sx={{ display: idDelete.length === 1 ? null : 'none' }}
                   variant={'outlined'} startIcon={<UpdateSharp />}>Update</Button>
         </Grid>
         <Grid item xs={12} md={1.1} sx={{ display: idDelete.length === 1 ? null : 'none' }}>
-          <Button onClick={handleClickInsert} disabled={deleteStatus} fullWidth
-                  sx={{ height: '54px', display: idDelete.length === 1 ? null : 'none' }}
+          <Button onClick={handleClickInsert} disabled={deleteStatus} fullWidth size={'medium'}
+                  sx={{ display: idDelete.length === 1 ? null : 'none' }}
                   variant={'outlined'} startIcon={<PlaylistAddSharp />}>Insert</Button>
         </Grid>
         <Grid item xs={12} md={1.1}>
           <Button onClick={handleClickDelete}
                   disabled={deleteStatus}
                   fullWidth
+                  size={'medium'}
                   sx={{
-                    height: '54px',
                     display: idDelete.length >= 1 ? null : 'none',
-                    color: '#FFFFFF',
-                    backgroundColor:'#F25E7A',
-                    borderColor: '#F25E7A',
+                    backgroundColor:customStyles['colorButtonDelete'],
                     '&:hover': {
-                      backgroundColor: '#F25E7A',
-                      color: '#FFFFFF',
+                      backgroundColor: customStyles['colorButtonDelete']
                     },
                   }}
                   variant={'outlined'}
                   startIcon={<DeleteOutline />}>Delete</Button>
         </Grid>
         <Grid item xs={12} md={12}>
-          <MuiDialog percentScreenW={'90%'}
-                     percentScreenH={'90%'}
+          <MuiDialog percentScreenWidth={'90%'}
+                     percentScreenHeight={'auto'}
                      open={isDialog}
                      setOpen={setIsDialog}
                      title={'Style Master Description'}
@@ -226,12 +228,12 @@ export const CustomToolbar = ({
         <Grid item xs={12} md={12}>
           <MuiDialog open={isDialogDelete}
                      setOpen={setIsDialogDelete}
-                     percentScreenW={ fullScreen ? '100%' : '30%'}
-                     percentScreenH={'23%'}
+                     percentScreenWidth={ fullScreen ? '100%' : '30%'}
+                     percentScreenHeight={'auto'}
                      buttonName={'Delete'}
                      buttonAccept={true}
-                     buttonColorBackground={'#F25E7A'}
-                     buttonColor={'white'}
+                     buttonColorBackground={customColorDefault.ColorButtonDelete.backgroundColor}
+                     buttonColor={customColorDefault.ColorButtonDelete.color}
                      buttonStartIcon={<DeleteSharp />}
                      content={<DeleteForm />}
                      handleClickAccept={handleClickDialogDelete}

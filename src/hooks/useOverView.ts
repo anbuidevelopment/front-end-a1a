@@ -1,19 +1,15 @@
 import { useCallback, useEffect, useState } from 'react';
 import {
-  convertToTitleCase,
   GetFilterInfo,
   GetOverViewInfo,
   GridDataInfo,
   TableInfo,
 } from '@/features/dashboard/types';
-import { GridColDef, GridPaginationModel } from '@mui/x-data-grid';
+import { GridPaginationModel } from '@mui/x-data-grid';
 import { loadDashBoard } from '@/features/dashboard/api/dashboard';
 import dayjs from 'dayjs';
 import { loadSearchDashBoard } from '@/features/dashboard/api/searchoverview';
 import { useUser } from '@/lib/auth';
-import { Button, ButtonGroup, IconButton } from '@mui/material';
-import { AddSharp, EditSharp } from '@mui/icons-material';
-import { customStyles } from '@/utils/format';
 
 export const useOverView = () => {
 
@@ -102,6 +98,18 @@ export const useOverView = () => {
           pProductType: '',
           pStyleMasterCode: '',
           pMerAccountName: '',
+        }));
+        break;
+      case 'pFromDate':
+        setParamsGetOverView((prevState)=>({
+          ...prevState,
+          pFromDate:searchValue.value,
+        }));
+        break;
+      case 'pToDate':
+        setParamsGetOverView((prevState)=>({
+          ...prevState,
+          pToDate:searchValue.value,
         }));
         break;
       default:

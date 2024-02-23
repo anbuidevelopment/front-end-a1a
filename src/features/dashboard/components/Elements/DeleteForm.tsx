@@ -1,6 +1,6 @@
-import { Avatar, Card, CardContent, Grid, Typography } from '@mui/material';
-import * as process from 'process';
-import { LogoRecycleBin } from '@/assets/recyclebin';
+import { Avatar, Grid, Typography } from '@mui/material';
+import { DeleteSharp } from '@mui/icons-material';
+import { customStyles } from '@/utils/format';
 
 export const DeleteForm = () => {
   return(
@@ -10,8 +10,8 @@ export const DeleteForm = () => {
               spacing={1}
               direction={'row'}>
           <Grid item xs={12} md={10} display={'flex'} justifyContent={'center'} alignItems={'center'}>
-            <Avatar sx={{backgroundColor:'#F25E7A'}}>
-              <LogoRecycleBin />
+            <Avatar sx={{backgroundColor: customStyles['colorButtonDelete']}}>
+              <DeleteSharp />
             </Avatar>
           </Grid>
           <Grid item xs={12} md={10} display={'flex'} justifyContent={'center'} alignItems={'center'}>

@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react';
-//import { MuiDialog:Dialog } from './Dialog';
+import { MuiDialog } from './Dialog';
 import React from 'react';
 import { useArgs } from '@storybook/preview-api';
 import {
@@ -7,16 +7,18 @@ import {
   DialogActions,
   DialogContent,
   DialogContentText,
-  DialogTitle,
+  DialogTitle, Typography,
 } from '@mui/material';
+import { DeleteSharp } from '@mui/icons-material';
+import { DeleteForm } from '@/features/dashboard/components/Elements/DeleteForm';
 
 const meta: Meta = {
   title: 'Components/Elements/Dialog',
-  //component: MuiDialog,
+  component: MuiDialog,
   parameters: {
     controls: { expanded: true },
   },
-} //satisfies Meta<typeof Dialog>;
+} satisfies Meta<typeof MuiDialog>;
 
 export default meta;
 
@@ -28,7 +30,7 @@ export const Example: Story = {
   },
 
   render: function Render(args) {
-    const [{ isOpen }, updateArgs] = useArgs();
+    const [{ isOpen,setIsOpen }, updateArgs] = useArgs();
 
     function close() {
       updateArgs({ isOpen: false });
@@ -40,27 +42,15 @@ export const Example: Story = {
 
     return (
       <>
-        {/*<Button variant={'outlined'} onClick={open}>*/}
-        {/*  Open Alert Dialog*/}
-        {/*</Button>*/}
-        {/*<Dialog isOpen={isOpen} onClose={close}>*/}
-        {/*  <DialogTitle>This is the demo of App Dialog</DialogTitle>*/}
-        {/*  <DialogContent>*/}
-        {/*    <DialogContentText>*/}
-        {/*      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vestibulum risus eu*/}
-        {/*      faucibus ullamcorper. Nullam faucibus sapien augue, a faucibus neque tincidunt ut.*/}
-        {/*      Nullam viverra justo a lorem efficitur, ac ullamcorper dolor scelerisque. Nullam*/}
-        {/*      egestas, odio auctor tristique ullamcorper, justo nunc venenatis urna, ac cursus*/}
-        {/*      libero mauris vitae mauris.*/}
-        {/*    </DialogContentText>*/}
-        {/*  </DialogContent>*/}
-        {/*  <DialogActions>*/}
-        {/*    <Button onClick={close}>Cancel</Button>*/}
-        {/*    <Button onClick={close} autoFocus>*/}
-        {/*      Confirm*/}
-        {/*    </Button>*/}
-        {/*  </DialogActions>*/}
-        {/*</Dialog>*/}
+        <Button variant={'outlined'} onClick={open}>
+          Open Alert Dialog
+        </Button>
+        <MuiDialog open={isOpen}
+                   setOpen={close}
+                   percentScreenWidth={'50%'}
+                   percentScreenHeight={'50%'}
+                   content={<Typography> 123</Typography>}
+        />
       </>
     );
   },

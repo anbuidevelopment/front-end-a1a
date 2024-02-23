@@ -1,40 +1,10 @@
-// import * as React from 'react';
-// import { Dialog as UIDialog } from '@mui/material';
-//
-// type DialogProps = {
-//   isOpen: boolean;
-//   onClose: () => void;
-//   children: React.ReactNode;
-// };
-//
-// export const Dialog = ({ isOpen, onClose, children }: DialogProps) => {
-//   return (
-//     <>
-//       <UIDialog
-//         open={isOpen}
-//         onClose={onClose}
-//         sx={{
-//           width: '75%',
-//           height: '75%',
-//           position: 'absolute',
-//           top: '50%',
-//           left: '50%',
-//           transform: 'translate(-50%,-50%)'
-//         }}
-//         fullScreen
-//       >
-//         {children}
-//       </UIDialog>
-//     </>
-//   );
-// };
 import {
   Dialog,
   DialogTitle,
   DialogContent,
   DialogContentText,
   DialogActions,
-  Button,
+  Button, IconButton,
 } from '@mui/material';
 import { CloseSharp } from '@mui/icons-material';
 import { useState } from 'react';
@@ -44,8 +14,8 @@ interface DialogProps {
   setOpen: (open: boolean) => void;
   title?: string;
   content?: any;
-  percentScreenW?: string;
-  percentScreenH?: string;
+  percentScreenWidth?: string;
+  percentScreenHeight?: string;
   buttonAccept?: boolean;
   buttonName?: string;
   buttonColor?: string;
@@ -54,61 +24,54 @@ interface DialogProps {
   handleClickAccept?: () => void;
 }
 
-export function MuiDialog({
-                            open,
-                            setOpen,
-                            title,
-                            content,
-                            percentScreenW,
-                            percentScreenH,
-                            buttonAccept,
-                            buttonName,
-                            handleClickAccept,
-                            buttonColor,
-                            buttonStartIcon,
-                            buttonColorBackground,
-                          }: DialogProps) {
+export const MuiDialog = ((props: DialogProps) => {
 
-  const [isAccepting, setIsAccepting] = useState(false);
+    const [isAccepting, setIsAccepting] = useState(false);
 
-  const handleAcceptClick = () => {
-    setIsAccepting(true);
+    const handleAcceptClick = () => {
+      setIsAccepting(true);
 
-    setTimeout(() => {
-      setOpen(false);
+      setTimeout(() => {
+        props.setOpen(false);
 
-      setIsAccepting(false);
-    }, 2000);
+        setIsAccepting(false);
+      }, 2000);
 
-    if (handleClickAccept) {
-      handleClickAccept();
-    }
-  };
+      if (props.handleClickAccept) {
+        props.handleClickAccept();
+      }
+    };
 
 
-  return (
-    <Dialog
-      sx={{ '& .MuiDialog-paper': { width: percentScreenW, height: percentScreenH } }}
-      fullScreen
-      open={open} onClose={()=>setOpen(false)} aria-labelledby='dialog-title'
-      aria-describedby='dialog-description'>
-      <DialogTitle id='dialog-title'>{title}</DialogTitle>
-      <DialogContent>
-        <DialogContentText id='dialog-description'>
-          {content}
-        </DialogContentText>
-      </DialogContent>
-      <DialogActions>
-        <Button sx={{ color: '#F25E7A',backgroundColor:'#FFFFFF' }}
-                startIcon={<CloseSharp />}
-                variant={'outlined'}
-                onClick={() => setOpen(false)}>Cancel</Button>
-        {buttonAccept ? <Button
-          sx={{ backgroundColor: buttonColorBackground, color: buttonColor }}
-          startIcon={buttonStartIcon} variant={'contained'}
-          onClick={handleAcceptClick}>{buttonName}</Button> : null}
-      </DialogActions>
-    </Dialog>
-  );
-}
+    return (
+      <Dialog
+        sx={{ '& .MuiDialog-paper': { width: props.percentScreenWidth, height: props.percentScreenHeight } }}
+        fullScreen
+        open={props.open} onClose={() => props.setOpen(false)} aria-labelledby='dialog-title'
+        aria-describedby='dialog-description'>
+        <DialogTitle id='dialog-title' fontStyle={'italic'}>{props.title}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id='dialog-description'>
+            {props.content}
+          </DialogContentText>
+          <IconButton
+            sx={{ position: 'absolute', top: 8, right: 8, borderColor: 'red' }}
+            onClick={() => props.setOpen(false)}>
+            <CloseSharp />
+          </IconButton>
+        </DialogContent>
+        <DialogActions>
+          {props.buttonAccept && (<Button
+            sx={{
+              backgroundColor: props.buttonColorBackground,
+              color: props.buttonColor,
+              borderColor: props.buttonColor,
+            }}
+            startIcon={props.buttonStartIcon}
+            onClick={handleAcceptClick}>{props.buttonName}</Button>)}
+        </DialogActions>
+      </Dialog>
+    );
+  }
+);
 

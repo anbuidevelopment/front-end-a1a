@@ -136,10 +136,13 @@ export interface GetStyleDetailInfo{
   pStyleMasterId:number
 }
 
-export function convertToTitleCase(str:string) {
-  return str.replace(/([A-Z])/g, ' $1').replace(/^./, function (str) {
-    return str.toUpperCase();
-  });
+export function convertToTitleCase(str: string): string {
+  return str
+    .replace(/([A-Z])/g, ' $1')
+    .replace(/^./, function (char) {
+      return char.toUpperCase();
+    })
+    .replace(/\bA1a\b/g, 'A1A');
 }
 
 

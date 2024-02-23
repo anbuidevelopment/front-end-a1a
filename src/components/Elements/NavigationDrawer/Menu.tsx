@@ -9,7 +9,6 @@ import {
   Tooltip, Typography,
 } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { useDisclosure } from '@/hooks/useDisclosure';
 import { Fragment } from 'react';
 import { EditNoteSharp } from '@mui/icons-material';
 import { customStyles, extractLastName } from '@/utils/format';
@@ -22,25 +21,22 @@ type MenuProps = {
 }
 
 export const Menu = ({ open }: MenuProps) => {
-  const { open: openMenu } = useDisclosure();
   const menuItems = [
     {
       text: 'Style Master',
-      icon: <Avatar variant={'circular'} sx={{ backgroundColor: customStyles['color1'] }}> <LogoClothes /></Avatar>,
+      icon: <Avatar variant={'circular'} sx={{ backgroundColor: customStyles['colorMenu'] }}> <LogoClothes /></Avatar>,
       to: '/',
-      onClick: openMenu,
     },
     {
       text: 'Style Info',
-      icon: <Avatar variant={'circular'} sx={{ backgroundColor: customStyles['color1'] }}> <EditNoteSharp /></Avatar>,
+      icon: <Avatar variant={'circular'} sx={{ backgroundColor: customStyles['colorMenu'] }}>
+        <EditNoteSharp /></Avatar>,
       to: '/info',
-      onClick: openMenu,
     },
     {
       text: 'Production Process',
-      icon: <Avatar variant={'circular'} sx={{ backgroundColor: customStyles['color1'] }}> <LogoProcess /></Avatar>,
+      icon: <Avatar variant={'circular'} sx={{ backgroundColor: customStyles['colorMenu'] }}> <LogoProcess /></Avatar>,
       to: '/process',
-      onClick: openMenu,
     },
   ];
 
@@ -49,9 +45,11 @@ export const Menu = ({ open }: MenuProps) => {
       {menuItems.map((item, index) => (
         <Fragment key={index}>
           <ListItem key={item.text} disablePadding>
-            <Tooltip title={<Typography variant={'h3'} sx={{backgroundColor:'#FCEEFC',color:'#8E54E9'}}> {item.text} </Typography>} placement={'right-start'}>
+            <Tooltip title={<Typography variant={'h3'} sx={{
+              backgroundColor: customStyles['colorBackground'],
+              color: customStyles['colorIcon'],
+            }}> {item.text} </Typography>} placement={'right-start'}>
               <Link to={item.to}
-                    onClick={item.onClick}
                     style={{
                       textDecoration: 'none',
                       color: 'inherit',
@@ -63,7 +61,7 @@ export const Menu = ({ open }: MenuProps) => {
                 <ListItemButton
                   key={item.text}
                   sx={{
-                    display: open ? 'flex' : 'block',
+                    display: open ? 'flex' : 'grid',
                     justifyContent: 'center',
                     paddingLeft: 1,
                     paddingRight: 1,
@@ -82,12 +80,11 @@ export const Menu = ({ open }: MenuProps) => {
                     justifyContent: open ? 'left' : 'center',
                   }} primary={open ? item.text : extractLastName(item.text)}
                                 primaryTypographyProps={{
-                                  fontWeight: open ? 'normal' : 'bold',
+                                  fontWeight: open ? 'normal' : 'normal',
                                   fontSize: open ? '1rem' : '0.7rem',
                                   variant: 'h5',
                                 }} />
                 </ListItemButton>
-
               </Link>
             </Tooltip>
           </ListItem>
